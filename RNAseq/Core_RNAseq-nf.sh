@@ -9,7 +9,7 @@ echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
 grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
-# transfer input data from staging
+# transfer input data from staging ($1 is ${dir} and $2 is ${netid} from args)
 cp -r /staging/$2/input/$1 input
 
 # clone nextflow git repo
@@ -23,5 +23,8 @@ nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir
 rm -r work
 rm -r input
 
-# mv large output files to staging to avoid their transfer back to /home/{net-id}
+# remove staging output folder if there from previous run
+rm -r /staging/$2/output/$1
+
+# mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
 mv output/$1/ /staging/$2/output/
