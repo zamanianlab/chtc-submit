@@ -1,5 +1,4 @@
 # Core_RNAseq-nf.sub
-# Submit scripts (.sub/.sh) in /home/{net-id}/
 # Input data in /staging/{net-id}/input/$(dir)
 # Run: condor_submit Core_RNAseq-nf.sub dir=191211_AHMMC5DMXX script=Core_RNAseq-nf.sh
 
