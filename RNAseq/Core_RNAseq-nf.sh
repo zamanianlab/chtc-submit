@@ -4,8 +4,13 @@
 export HOME=$PWD
 mkdir input work output
 
+# echo core, thread, and memory
+echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
+grep 'cpu cores' /proc/cpuinfo | uniq
+echo $(free -g)
+
 # transfer input data from staging
-cp -r /staging/{net-id}/input/$1 input
+cp -r /staging/$2/input/$1 input
 
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/Core_RNAseq-nf.git
@@ -19,4 +24,4 @@ rm -r work
 rm -r input
 
 # mv large output files to staging to avoid their transfer back to /home/{net-id}
-mv output/$1/ /staging/{net-id}/output/
+mv output/$1/ /staging/$2/output/
