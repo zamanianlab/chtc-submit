@@ -25,7 +25,7 @@ should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
 
 # memory, disk and CPU requests
-request_cpus = 64
+request_cpus = 80
 request_memory = 128GB
 request_disk = 1500GB
 
