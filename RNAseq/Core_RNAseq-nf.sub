@@ -25,9 +25,9 @@ should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
 
 # memory, disk and CPU requests
-request_cpus = 40
-request_memory = 480GB
-request_disk = 2500GB
+request_cpus = 32
+request_memory = 128GB
+request_disk = 1000GB
 
 # submit 1 job
 queue 1
