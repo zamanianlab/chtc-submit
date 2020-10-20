@@ -7,7 +7,7 @@ Accounting_Group = PathobiologicalSciences_Zamanian
 
 # load docker image; request execute server with large data staging
 universe = docker
-docker_image = zamanianlab/chtc-rnaseq:latest
+docker_image = zamanianlab/chtc-rnaseq:v1
 Requirements = (Target.HasCHTCStaging == true)
 
 # executable (/home/{net-id}/) and arguments
