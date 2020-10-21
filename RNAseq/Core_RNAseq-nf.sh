@@ -15,7 +15,7 @@ cp -r /staging/$2/input/$1 input
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/Core_RNAseq-nf.git
 
-# run nextflow
+# run nextflow (no QC, star)
 export NXF_OPTS='-Xms1g -Xmx8g'
 nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config \
   --dir $1 --star --release "WBPS14" --species "brugia_malayi" --prjn "PRJNA10729" --rlen "150"
