@@ -25,8 +25,7 @@ rm -r work
 rm -r input
 
 # tar output folder and delete it
-tar -cvf output/$1.tar output/$1
-rm -r output/$1
+cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
 
 # remove staging output tar if there from previous run
 rm -f /staging/$2/output/$1.tar
