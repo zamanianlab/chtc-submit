@@ -24,8 +24,12 @@ nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir
 rm -r work
 rm -r input
 
-# remove staging output folder if there from previous run
-rm -r /staging/$2/output/$1
+# tar output folder and delete it
+tar -cvf output/$1.tar output/$1
+rm -r output/$1
+
+# remove staging output tar if there from previous run
+rm -r /staging/$2/output/$1.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1/ /staging/$2/output/
+mv output/$1.tar.gz /staging/$2/output/
