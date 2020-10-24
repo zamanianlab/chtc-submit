@@ -21,8 +21,7 @@ nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir
    --star --qc --release "WBPS14" --species "brugia_malayi" --prjn "PRJNA10729" --rlen "150"
 
 # rm files you don't want transferred back to /home/{net-id}
-rm -r work
-rm -r input
+rm -r work input
 
 # tar output folder and delete it
 cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
