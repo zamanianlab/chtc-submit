@@ -9,7 +9,7 @@ echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
 grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
-# transfer input data from staging ($1 is ${dir} and $2 is ${netid} from args)
+# transfer input data from staging ($1 is ${dir} from args)
 cp -r /staging/groups/zamanian_group/input/$1 input
 
 # clone nextflow git repo
