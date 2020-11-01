@@ -1,6 +1,6 @@
 # Core_RNAseq-nf.sub
-# Input data in /staging/{net-id}/input/$(dir)
-# Run: condor_submit Core_RNAseq-nf.sub dir=191211_AHMMC5DMXX netid=mzamanian script=Core_RNAseq-nf.sh
+# Input data in /staging/groups/zamanian_group/input/$(dir)
+# Run: condor_submit Core_RNAseq-nf.sub dir=191211_AHMMC5DMXX script=Core_RNAseq-nf.sh
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
@@ -12,7 +12,7 @@ Requirements = (Target.HasCHTCStaging == true)
 
 # executable (/home/{net-id}/) and arguments
 executable = $(script)
-arguments = $(dir) $(netid)
+arguments = $(dir)
 
 # log, error, and output files
 log = $(dir)_$(Cluster)_$(Process).log

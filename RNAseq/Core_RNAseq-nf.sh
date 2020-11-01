@@ -10,12 +10,12 @@ grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
 # transfer input data from staging ($1 is ${dir} and $2 is ${netid} from args)
-cp -r /staging/$2/input/$1 input
+cp -r /staging/groups/zamanian_group/input/$1 input
 
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/Core_RNAseq-nf.git
 
-# run nextflow (no QC, star)
+# run nextflow (QC, star)
 export NXF_OPTS='-Xms1g -Xmx8g'
 nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1\
    --star --qc --release "WBPS14" --species "brugia_malayi" --prjn "PRJNA10729" --rlen "150"
@@ -27,7 +27,7 @@ rm -r work input
 cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
 
 # remove staging output tar if there from previous run
-rm -f /staging/$2/output/$1.tar
+rm -f /staging/groups/zamanian_group/output/$1.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1.tar /staging/$2/output/
+mv output/$1.tar /staging/groups/zamanian_group/output/
