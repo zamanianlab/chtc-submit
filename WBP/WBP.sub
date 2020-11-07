@@ -5,7 +5,7 @@ Accounting_Group = PathobiologicalSciences_Zamanian
 
 # load docker image; request execute server with large data staging
 universe = docker
-docker_image = zamanianlab/chtc-comgen:latest
+docker_image = zamanianlab/chtc-comgen:v1
 Requirements = (Target.HasCHTCStaging == true)
 
 # executable (/home/{net-id}/) and arguments
