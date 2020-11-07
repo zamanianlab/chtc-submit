@@ -63,7 +63,7 @@ rm output/all/all.protein.fa
 # Create GTF and exon RDS files ------------------------------------------------
 
 # load in R script
-curl https://raw.githubusercontent.com/zamanianlab/CHTC-submit/main/WBP/parse_GTF.R > input/parase_GTF.R
+curl https://raw.githubusercontent.com/zamanianlab/CHTC-submit/main/WBP/parse_GTF.R > input/parse_GTF.R
 
 while IFS= read -r line
 do
