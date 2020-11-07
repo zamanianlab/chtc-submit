@@ -9,6 +9,7 @@ echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
 grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
+
 # Generate list of species hosted at WBP
 curl -l ftp://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/current/species/ > output/species_all.txt
 species=output/species_all.txt
@@ -61,16 +62,18 @@ rm output/all/all.protein.fa
 
 # Create GTF and exon RDS files ------------------------------------------------
 
+# load in R script
+curl https://raw.githubusercontent.com/zamanianlab/CHTC-submit/main/WBP/parse_GTF.R > input/parase_GTF.R
+
 while IFS= read -r line
 do
   # split the line into an array with species + BioProject
   array=($(echo "$line" | sed 's/\// /g'))
   species_folder=output/${array[0]}/${array[1]}
   gunzip -k $species_folder/*.gtf.gz
-  Rscript scripts/parse_GTF.R $species_folder/*.gtf ${array[0]}
+  Rscript input/parse_GTF.R $species_folder/*.gtf ${array[0]}
   rm $species_folder/*.gtf
 done <"$species"
-
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
