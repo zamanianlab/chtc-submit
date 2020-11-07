@@ -11,7 +11,7 @@ echo $(free -g)
 
 
 # Generate list of species hosted at WBP
-curl -l ftp://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/current/species/ > output/species_all.txt
+wget -qO- ftp://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/current/species/ | sed -e 's/<[^>]*>//g' | sed -e 's/\///g' | sed '/^$/d' | awk '{ print $6 }' > output/species_all.txt
 species=output/species_all.txt
 
 
