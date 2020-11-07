@@ -16,7 +16,7 @@ species=output/species_all.txt
 
 
 # Download data ----------------------------------------------------------------
-wbp_prefix="ftp://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/WBP15/species"
+wbp_prefix="ftp://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/current/species/"
 
 # -N: only download newer versions
 # -nc: no clobber; ignore server files that aren't newer than the local version
@@ -63,7 +63,7 @@ rm output/all/all.protein.fa
 # Create GTF and exon RDS files ------------------------------------------------
 
 # load in R script
-curl https://raw.githubusercontent.com/zamanianlab/CHTC-submit/main/WBP/parse_GTF.R > input/parse_GTF.R
+wget -c https://raw.githubusercontent.com/zamanianlab/CHTC-submit/main/WBP/parse_GTF.R > input/parse_GTF.R
 
 while IFS= read -r line
 do
