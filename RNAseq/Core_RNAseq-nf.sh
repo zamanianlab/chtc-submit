@@ -30,4 +30,4 @@ cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
 rm -f /staging/groups/zamanian_group/output/$1.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1.tar /staging/mzamanian/output/
+mv output/$1.tar /staging/groups/zamanian_group/output/
