@@ -9,8 +9,9 @@ echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
 grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
-# transfer input data from staging ($1 is ${dir} from args)
-cp -r /staging/groups/zamanian_group/input/$1 input
+# transfer and decompress input data from staging ($1 is ${dir} from args)
+cp -r /staging/groups/zamanian_group/input/$1.tar input
+cd input && tar -xvf input/$1.tar && rm -r $1.tar && cd ..
 
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/Core_RNAseq-nf.git
