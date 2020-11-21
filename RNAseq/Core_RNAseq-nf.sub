@@ -1,5 +1,5 @@
 # Input data: /staging/groups/zamanian_group/input/$(dir).tar
-# Run: condor_submit Core_RNAseq-nf.sub dir=191211_AHMMC5DMXX script=Core_RNAseq-nf.sh
+# Run: condor_submit Core_RNAseq-nf.sub dir=201105_AHLVWJDSXY script=Core_RNAseq-nf.sh
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
