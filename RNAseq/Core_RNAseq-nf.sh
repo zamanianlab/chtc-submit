@@ -11,7 +11,7 @@ echo $(free -g)
 
 # transfer and decompress input data from staging ($1 is ${dir} from args)
 cp -r /staging/groups/zamanian_group/input/$1.tar input
-cd input && tar -xvf $1.tar && rm $1.tar && cd ..
+cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd ..
 
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/Core_RNAseq-nf.git
