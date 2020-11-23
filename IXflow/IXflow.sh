@@ -11,14 +11,37 @@ grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
 # transfer and decompress input data from staging ($1 is ${dir} from args)
-cp -r /staging/groups/zamanian_group/input/$1.tar input
-cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd ..
+# cp -r /staging/groups/zamanian_group/input/$1.tar input
+
+# cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd ..
+
+# for testing
+scp -r njwheeler@transfer.chtc.wisc.edu:/staging/groups/zamanian_group/subsampled/20201118-p01-MZ_172_sub.tar subsampled/
+cd subsampled && tar -xvf 20201118-p01-MZ_172_sub.tar && rm 20201118-p01-MZ_172_sub.tar && mv */*/* 20201118-p01-MZ_172_sub && cd ..
+
+# get basename and plate IX metadata (from HTD file)
+base=`echo $1 | cut -d"_" -f1`
+time_points=`grep "TimePoints" input/$1/$base.HTD | cut -d',' -f2`
+columns=`grep "XWells" input/$1/$base.HTD | cut -d',' -f2`
+rows=`grep "YWells" input/$1/$base.HTD | cut -d',' -f2`
+x_sites=`grep "XSites" input/$1/$base.HTD | cut -d',' -f2`
+y_sites=`grep "YSites" input/$1/$base.HTD | cut -d',' -f2`
+NWavelengths=`grep "NWavelengths" input/$1/$base.HTD | cut -d',' -f2`
+WaveNames=`grep "WaveName" input/$1/$base.HTD | cut -d',' -f2`
+echo "base name: ${base}"
+echo "time_points: ${time_points}"
+echo "columns: ${columns}"
+echo "rows: ${rows}"
+echo "x_sites: ${x_sites}"
+echo "y_sites: ${y_sites}"
+echo "NWavelengths: ${NWavelengths}"
+echo "WaveNames: ${WaveNames}"
 
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/BrugiaMotilityAnalysis.git
 
 # run script
-python BrugiaMotilityAnalysis/chtc-ix_optical_flow.py input output/$1 96 40
+python BrugiaMotilityAnalysis/chtc-ix_optical_flow.py input output/$1 $rows $columns $time_points
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
