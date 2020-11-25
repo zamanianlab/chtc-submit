@@ -41,7 +41,7 @@ echo "WaveNames: ${WaveNames}"
 git clone https://github.com/zamanianlab/BrugiaMotilityAnalysis.git
 
 # run script
-python ~/GitHub/BrugiaMotilityAnalysis/chtc-ix_optical_flow.py \
+python BrugiaMotilityAnalysis/chtc-ix_optical_flow.py \
   input/$1 \
   output/$1 \
   work/$1 \
