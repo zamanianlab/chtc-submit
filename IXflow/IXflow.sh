@@ -47,8 +47,8 @@ python BrugiaMotilityAnalysis/chtc-ix_optical_flow.py \
   work/$1 \
   $rows \
   $columns \
-  $time_points \
-  --reorganize
+  $time_points #\
+  #--reorganize
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
