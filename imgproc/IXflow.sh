@@ -38,10 +38,10 @@ echo "NWavelengths: ${NWavelengths}"
 echo "WaveNames: ${WaveNames}"
 
 # clone nextflow git repo
-git clone https://github.com/zamanianlab/BrugiaMotilityAnalysis.git
+git clone https://github.com/zamanianlab/Core_imgproc.git
 
 # run script
-python BrugiaMotilityAnalysis/chtc-ix_optical_flow.py \
+python Core_imgproc/IXflow/chtc-ix_optical_flow.py \
   input/$1 \
   output/$1 \
   work/$1 \
