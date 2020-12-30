@@ -2,8 +2,9 @@
 
 # set home () and mk dirs
 export HOME=$PWD
-mkdir input work output
+mkdir input metadata work output
 mkdir output/$1
+mkdir metadata/$1
 mkdir work/$1
 
 # echo core, thread, and memory
@@ -14,6 +15,10 @@ echo $(free -g)
 # transfer and decompress input data from staging ($1 is ${dir} from args)
 cp -r /staging/groups/zamanian_group/input/$1.tar input
 cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd ..
+
+# transfer and decompress metadata from staging ($1 is ${dir} from args)
+cp -r /staging/groups/zamanian_group/metadata/$1.tar metadata
+cd metadata && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd ..
 
 # for testing
 # scp -r njwheeler@transfer.chtc.wisc.edu:/staging/groups/zamanian_group/subsampled/20201118-p01-MZ_172_sub.tar subsampled/
