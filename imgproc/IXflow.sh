@@ -50,6 +50,8 @@ python Core_imgproc/IXflow/chtc-ix_optical_flow.py \
   $time_points #\
   #--reorganize
 
+Rscript Core_imgproc/metadata_join.R $1
+
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
 
