@@ -58,7 +58,7 @@ python Core_imgproc/IXflow/chtc-ix_optical_flow.py \
 Rscript Core_imgproc/metadata_join.R $1
 
 # rm files you don't want transferred back to /home/{net-id}
-rm -r work input
+rm -r work input metadata
 
 # tar output folder and delete it
 cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
