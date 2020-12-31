@@ -4,7 +4,6 @@
 export HOME=$PWD
 mkdir input metadata work output
 mkdir output/$1
-mkdir metadata/$1
 mkdir work/$1
 
 # echo core, thread, and memory
