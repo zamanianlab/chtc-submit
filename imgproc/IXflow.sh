@@ -45,7 +45,7 @@ echo "WaveNames: ${WaveNames}"
 git clone https://github.com/zamanianlab/Core_imgproc.git
 
 # run script
-python Core_imgproc/IXflow/chtc-ix_optical_flow.py \
+python Core_imgproc/IXflow/chtc-ix_optical_flow_mf.py \
   input/$1 \
   output/$1 \
   work/$1 \
