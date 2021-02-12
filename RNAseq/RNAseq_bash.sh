@@ -23,13 +23,28 @@ STAR --runThreadN 12 --runMode genomeGenerate  --genomeDir STAR_index \
   --sjdbOverhang 150
 
 # align trimmed reads to genome
-STAR --runThreadN 12 --runMode alignReads --genomeDir STAR_index\
+cd ..
+STAR --runThreadN 12 --runMode alignReads --genomeDir work/STAR_index\
   --outSAMtype BAM Unsorted --readFilesCommand zcat \
-  --outFileNamePrefix singlecell. --readFilesIn work/out.R1.fq.gz work/out.R2.fq.gz\
+  --outFileNamePrefix output/singlecell. --readFilesIn work/out.R1.fq.gz work/out.R2.fq.gz\
   --peOverlapNbasesMin 10 \
   --quantMode GeneCounts --outSAMattrRGline ID:singlecell
+cd output
 samtools sort -@ 12 -m 64G -o singlecell.bam singlecell.Aligned.out.bam
 rm *.Aligned.out.bam
 samtools index -@ 12 -b singlecell.bam
 samtools flagstat singlecell.bam > singlecell.flagstat.txt
 cat singlecell.ReadsPerGene.out.tab | cut -f 1,2 > singlecell.ReadsPerGene.tab
+cd ..
+
+# rm files you don't want transferred back to /home/{net-id}
+rm -r work input
+
+# tar output folder and delete it
+cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
+
+# remove staging output tar if there from previous run
+rm -f /staging/groups/zamanian_group/output/$1.tar
+
+# mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
+mv output/$1.tar /staging/groups/zamanian_group/output/
