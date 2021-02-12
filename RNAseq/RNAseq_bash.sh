@@ -26,6 +26,7 @@ mkdir STAR_index
 STAR --runThreadN 12 --runMode genomeGenerate  --genomeDir STAR_index \
   --genomeFastaFiles reference.fa \
   --sjdbGTFfile geneset.gtf \
+  --genomeSAindexNbases 12 \
   --sjdbOverhang 150
 cd ..
 
@@ -34,10 +35,9 @@ STAR --runThreadN 12 --runMode alignReads --genomeDir work/STAR_index \
   --outSAMtype BAM Unsorted --readFilesCommand zcat \
   --outFileNamePrefix output/$1/singlecell. --readFilesIn work/out.R1.fq.gz work/out.R2.fq.gz \
   --peOverlapNbasesMin 10 \
-  --genomeSAindexNbases 12 \
   --quantMode GeneCounts --outSAMattrRGline ID:sc
 cd output/$1
-samtools sort -@ 12 -m 64G -o singlecell.bam singlecell.Aligned.out.bam
+samtools sort -@ 12 -m 12G -o singlecell.bam singlecell.Aligned.out.bam
 rm *.Aligned.out.bam
 samtools index -@ 12 -b singlecell.bam
 samtools flagstat singlecell.bam > singlecell.flagstat.txt
