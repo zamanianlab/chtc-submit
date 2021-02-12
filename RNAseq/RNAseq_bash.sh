@@ -42,7 +42,7 @@ rm *.Aligned.out.bam
 samtools index -@ 12 -b singlecell.bam
 samtools flagstat singlecell.bam > singlecell.flagstat.txt
 cat singlecell.ReadsPerGene.out.tab | cut -f 1,2 > singlecell.ReadsPerGene.tab
-cd ..
+cd ~
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
