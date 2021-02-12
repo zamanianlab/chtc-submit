@@ -4,8 +4,13 @@
 export HOME=$PWD
 mkdir input work output
 
+# transfer and decompress input data from staging ($1 is ${dir} from args)
+cp -r /staging/groups/zamanian_group/input/$1.tar input
+#cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
+cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
+
 # adapter-trimming
-fastp -i input/1_S1_L001_R1_001.fastq.gz -I input/1_S1_L001_R2_001.fastq.gz -o work/out.R1.fq.gz -O work/out.R2.fq.gz
+fastp -i input/$1/1_S1_L001_R1_001.fastq.gz -I input/$1/1_S1_L001_R2_001.fastq.gz -o work/out.R1.fq.gz -O work/out.R2.fq.gz
 
 # download the genome and the brugia annotation gtf
 wget -c ftp://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/WBPS15/species/brugia_malayi/PRJNA10729/brugia_malayi.PRJNA10729.WBPS15.genomic.fa.gz -O work/reference.fa.gz
@@ -29,7 +34,8 @@ STAR --runThreadN 12 --runMode alignReads --genomeDir work/STAR_index\
   --outFileNamePrefix output/singlecell. --readFilesIn work/out.R1.fq.gz work/out.R2.fq.gz\
   --peOverlapNbasesMin 10 \
   --quantMode GeneCounts --outSAMattrRGline ID:singlecell
-cd output
+mkdir output/$1
+cd output/$1
 samtools sort -@ 12 -m 64G -o singlecell.bam singlecell.Aligned.out.bam
 rm *.Aligned.out.bam
 samtools index -@ 12 -b singlecell.bam
