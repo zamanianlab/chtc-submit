@@ -35,7 +35,7 @@ cellranger mkgtf geneset.gtf geneset.cellranger.gtf \
 # cellranger make reference
 cellranger mkref --nthreads 40 \
     --genome="$species" \
-    --fasta=reference.fa.gz \
+    --fasta=reference.fa \
     --genes=geneset.cellranger.gtf
 
 # run cellranger
