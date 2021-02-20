@@ -48,6 +48,7 @@ cellranger count --id=$1 \
                    --expect-cells=10000 \
                    --localcores=40 \
                    --localmem=256
+cd ..
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
