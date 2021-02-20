@@ -29,22 +29,18 @@ zcat reference.fa.gz > reference.fa
 zcat geneset.gtf.gz > geneset.gtf
 
 # make a filtered version of the gtf without any pseudogenes etc.
-cellranger mkgtf reference.gtf reference.cellranger.gtf \
+cellranger mkgtf geneset.gtf geneset.cellranger.gtf \
     --attribute=gene_biotype:protein_coding
 
 # cellranger make reference
-#cellranger mkref --ref-version="$release" \
-#    --genome="$species" --fasta="$fasta_modified" --genes="$gtf_filtered"
-
 cellranger mkref --nthreads 40 \
     --genome="$species" \
     --fasta=reference.fa.gz \
-    --genes=reference.cellranger.gtf
-
+    --genes=geneset.cellranger.gtf
 
 # run cellranger
 cellranger count --id=$1 \
-                   --transcriptome=/work/$species \
+                   --transcriptome=$species \
                    --fastqs=input/$1/ \
                    --sample=$1 \
                    --expect-cells=10,000 \
