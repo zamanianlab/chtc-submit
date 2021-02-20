@@ -10,6 +10,11 @@ cp -r /staging/groups/zamanian_group/input/$1.tar input
 #cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
 cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
 
+# rm non-fastq files from input directory
+cd input/$1
+find . -type f ! -name '*.fastq.gz' -delete
+cd ..
+cd ..
 
 # download the genome and the brugia annotation gtf
 species="brugia_malayi"
