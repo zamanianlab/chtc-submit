@@ -38,8 +38,8 @@ cellranger mkref --nthreads 40 \
 # run cellranger
 cd ..
 cellranger count --id=$1 \
-                   --transcriptome=~/work/$species \
-                   --fastqs=~/input/$1/ \
+                   --transcriptome=work/$species \
+                   --fastqs=input/$1/ \
                    --sample=$1 \
                    --expect-cells=10,000 \
                    --localcores=40 \
