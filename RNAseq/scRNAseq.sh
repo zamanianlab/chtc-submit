@@ -13,8 +13,8 @@ cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file stru
 # rm non-fastq files from input directory
 cd input/$1
 find . -type f ! -name '*.fastq.gz' -delete
-cd ..
-cd ..
+cd .. && cd ..
+
 
 # download the genome and the brugia annotation gtf
 species="brugia_malayi"
@@ -41,44 +41,22 @@ cellranger mkref --nthreads 40 \
     --genes=geneset.cellranger.gtf
 
 # run cellranger
-cd ..
+cd .. && cd output
 cellranger count --id=$1 \
-                   --transcriptome=work/$species \
-                   --fastqs=input/$1/ \
+                   --transcriptome=../work/$species \
+                   --fastqs=../input/$1/ \
                    --expect-cells=10000 \
                    --localcores=40 \
                    --localmem=256
 
-# mkdir STAR_index
-# STAR --runThreadN 12 --runMode genomeGenerate  --genomeDir STAR_index \
-#   --genomeFastaFiles reference.fa \
-#   --sjdbGTFfile geneset.gtf \
-#   --genomeSAindexNbases 12 \
-#   --sjdbOverhang 150
-# cd ..
-#
-# # align trimmed reads to genome
-# STAR --runThreadN 12 --runMode alignReads --genomeDir work/STAR_index \
-#   --outSAMtype BAM Unsorted --readFilesCommand zcat \
-#   --outFileNamePrefix output/$1/singlecell. --readFilesIn work/out.R1.fq.gz work/out.R2.fq.gz \
-#   --peOverlapNbasesMin 10 \
-#   --quantMode GeneCounts --outSAMattrRGline ID:sc
-# cd output/$1
-# samtools sort -@ 12 -m 12G -o singlecell.bam singlecell.Aligned.out.bam
-# rm *.Aligned.out.bam
-# samtools index -@ 12 -b singlecell.bam
-# samtools flagstat singlecell.bam > singlecell.flagstat.txt
-# cat singlecell.ReadsPerGene.out.tab | cut -f 1,2 > singlecell.ReadsPerGene.tab
-# cd ~
-#
-# # rm files you don't want transferred back to /home/{net-id}
-# rm -r work input
-#
-# # tar output folder and delete it
-# cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
-#
-# # remove staging output tar if there from previous run
-# rm -f /staging/groups/zamanian_group/output/$1.tar
-#
-# # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-# mv output/$1.tar /staging/groups/zamanian_group/output/
+# rm files you don't want transferred back to /home/{net-id}
+rm -r work input
+
+# tar output folder and delete it
+cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
+
+# remove staging output tar if there from previous run
+rm -f /staging/groups/zamanian_group/output/$1.tar
+
+# mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
+mv output/$1.tar /staging/groups/zamanian_group/output/
