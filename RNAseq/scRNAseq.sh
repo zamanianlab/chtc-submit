@@ -10,9 +10,6 @@ cp -r /staging/groups/zamanian_group/input/$1.tar input
 #cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
 cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
 
-# adapter-trimming
-#fastp -i input/$1/1_S1_L001_R1_001.fastq.gz -I input/$1/1_S1_L001_R2_001.fastq.gz -o work/out.R1.fq.gz -O work/out.R2.fq.gz
-
 
 # download the genome and the brugia annotation gtf
 species="brugia_malayi"
@@ -39,9 +36,10 @@ cellranger mkref --nthreads 40 \
     --genes=geneset.cellranger.gtf
 
 # run cellranger
+cd ..
 cellranger count --id=$1 \
-                   --transcriptome=$species \
-                   --fastqs=input/$1/ \
+                   --transcriptome=~/work/$species \
+                   --fastqs=~/input/$1/ \
                    --sample=$1 \
                    --expect-cells=10,000 \
                    --localcores=40 \
