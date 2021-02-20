@@ -14,7 +14,6 @@ cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file stru
 #fastp -i input/$1/1_S1_L001_R1_001.fastq.gz -I input/$1/1_S1_L001_R2_001.fastq.gz -o work/out.R1.fq.gz -O work/out.R2.fq.gz
 
 
-
 # download the genome and the brugia annotation gtf
 species="brugia_malayi"
 release="WBPS15"
@@ -22,8 +21,8 @@ prjn="PRJNA10729"
 prefix="ftp://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/${release}/species/${species}/${prjn}"
 
 echo '${prefix}'
-wget -c ${prefix}/${params.species}.${params.prjn}.${params.release}.canonical_geneset.gtf.gz -O work/geneset.gtf.gz
-wget -c ${prefix}/${params.species}.${params.prjn}.${params.release}.genomic.fa.gz -O work/reference.fa.gz
+wget -c ${prefix}/${species}.${prjn}.${release}.canonical_geneset.gtf.gz -O work/geneset.gtf.gz
+wget -c ${prefix}/${species}.${prjn}.${release}.genomic.fa.gz -O work/reference.fa.gz
 
 cd work
 zcat reference.fa.gz > reference.fa
