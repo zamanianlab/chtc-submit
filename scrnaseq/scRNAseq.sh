@@ -30,8 +30,11 @@ cd work
 zcat reference.fa.gz > reference.fa
 zcat geneset.gtf.gz > geneset.gtf
 
+# extend 3' UTRs by set length (geneset.gtf > geneset.3ext.gtf)
+Rscript --vanilla gtf_process.R 500
+
 # make a filtered version of the gtf without any pseudogenes etc.
-cellranger mkgtf geneset.gtf geneset.cellranger.gtf \
+cellranger mkgtf geneset.3ext.gtf geneset.cellranger.gtf \
     --attribute=gene_biotype:protein_coding
 
 # cellranger make reference
