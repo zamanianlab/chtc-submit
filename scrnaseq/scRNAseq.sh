@@ -49,6 +49,7 @@ cd .. && cd output
 cellranger count --id=$1 \
                    --transcriptome=../work/$species \
                    --fastqs=../input/$1/ \
+                   --sample=tBM,utBM \
                    --include-introns \
                    --expect-cells=10000 \
                    --localcores=40 \
