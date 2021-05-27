@@ -7,8 +7,8 @@ mkdir output/$1
 
 # transfer and decompress input data from staging ($1 is ${dir} from args)
 cp -r /staging/groups/zamanian_group/input/$1.tar input
-#cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
-cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
+cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
+#cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
 
 # rm non-fastq files from input directory
 cd input/$1
@@ -39,7 +39,7 @@ cellranger mkgtf geneset.3ext.gtf geneset.cellranger.gtf \
     --attribute=gene_biotype:protein_coding
 
 # cellranger make reference
-cellranger mkref --nthreads 40 \
+cellranger mkref --nthreads 60 \
     --genome="$species" \
     --fasta=reference.fa \
     --genes=geneset.cellranger.gtf
@@ -52,8 +52,8 @@ cellranger count --id=$1 \
                    --sample=tBM,utBM \
                    --include-introns \
                    --expect-cells=10000 \
-                   --localcores=40 \
-                   --localmem=256
+                   --localcores=60 \
+                   --localmem=290
 cd ..
 
 # rm files you don't want transferred back to /home/{net-id}
