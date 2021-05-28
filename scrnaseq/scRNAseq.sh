@@ -50,9 +50,9 @@ cellranger count --id=$1 \
                    --transcriptome=../work/$species \
                    --fastqs=../input/$1/ \
                    --sample=tBM,utBM \
-                   --lanes=1 \
+                   #--lanes=1 \
                    --include-introns \
-                   --force-cells=10000 \
+                  # --force-cells=10000 \
                    --localcores=60 \
                    --localmem=290
 cd ..
