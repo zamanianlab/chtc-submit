@@ -52,7 +52,7 @@ cellprofiler -c -r -p batch_files/$1.h5 -f 1 -l 10
 # rm -r work input metadata
 
 # tar output folder and delete it
-cd CellProfiler_Pipelines && tar -cvf $1.tar output && rm -r output && cd /CellProfiler_Pipelines
+cd CellProfiler_Pipelines && tar -cvf $1.tar output && rm -r output && cd ~/CellProfiler_Pipelines
 
 # remove staging output tar if there from previous run
 rm -f /staging/groups/zamanian_group/output/$1.tar
