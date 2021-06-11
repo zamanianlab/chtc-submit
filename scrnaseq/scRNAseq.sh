@@ -31,8 +31,8 @@ zcat reference.fa.gz > reference.fa
 zcat geneset.gtf.gz > geneset.gtf
 
 # extend 3' UTRs by set length (geneset.gtf > geneset.3ext.gtf)
-wget https://raw.githubusercontent.com/zamanianlab/Core_RNAseq-nf/master/auxillary/sc_scripts/gtf_process.R
-Rscript --vanilla gtf_process.R 300
+#wget https://raw.githubusercontent.com/zamanianlab/Core_RNAseq-nf/master/auxillary/sc_scripts/gtf_process.R
+#Rscript --vanilla gtf_process.R 300
 
 # make a filtered version of the gtf without any pseudogenes etc.
 cellranger mkgtf geneset.3ext.gtf geneset.cellranger.gtf \
