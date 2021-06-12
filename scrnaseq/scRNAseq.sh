@@ -35,7 +35,8 @@ zcat geneset.gtf.gz > geneset.gtf
 #Rscript --vanilla gtf_process.R 300
 
 # make a filtered version of the gtf without any pseudogenes etc.
-cellranger mkgtf geneset.3ext.gtf geneset.cellranger.gtf \
+#cellranger mkgtf geneset.3ext.gtf geneset.cellranger.gtf \
+cellranger mkgtf geneset.gtf geneset.cellranger.gtf \
     --attribute=gene_biotype:protein_coding
 
 # cellranger make reference
