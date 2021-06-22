@@ -35,18 +35,17 @@ cat reference.fa | awk '$0 ~ ">" {if (NR > 1) {print c;} c=0;printf substr($0,2,
 
 # extend 3' UTRs, genes, and trascripts by set length (geneset.gtf > geneset.3ext.gtf)
 wget https://raw.githubusercontent.com/zamanianlab/Core_RNAseq-nf/master/auxillary/sc_scripts/gtf_process.R
-Rscript --vanilla gtf_process.R 200
+Rscript --vanilla gtf_process.R 0
 
 # make a filtered version of the gtf without any pseudogenes etc.
-#cellranger mkgtf geneset.3ext.gtf geneset.cellranger.gtf \
-#    --attribute=gene_biotype:protein_coding
+cellranger mkgtf geneset.3ext.gtf geneset.cellranger.gtf \
+   --attribute=gene_biotype:protein_coding
 
 # cellranger make reference
 cellranger mkref --nthreads 60 \
     --genome="$species" \
     --fasta=reference.fa \
-    --genes=geneset.3ext.gtf
-  #  --genes=geneset.cellranger.gtf
+    --genes=geneset.cellranger.gtf
 
 # run cellranger
 cd .. && cd output
@@ -62,7 +61,7 @@ cellranger count --id=$1 \
 cd ..
 
 # rm files you don't want transferred back to /home/{net-id}
-rm -r work input
+rm -r work input output/210518_BH7FNCDRXY/outs/*.bam
 
 # tar output folder and delete it
 cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
@@ -71,4 +70,4 @@ cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
 rm -f /staging/groups/zamanian_group/output/$1.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1.tar /staging/groups/zamanian_group/output/
+mv output/$1.tar /staging/groups/zamanian_group/output/$1.0.tar
