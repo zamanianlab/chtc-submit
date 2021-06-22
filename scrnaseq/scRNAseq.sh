@@ -31,7 +31,7 @@ zcat reference.fa.gz > reference.fa
 zcat geneset.gtf.gz > geneset.gtf
 
 # create txt file with contig name and length
-cat reference.fa | awk ‘$0 ~ “>” {if (NR > 1) {print c;} c=0;printf substr($0,2,100) “\t”; } $0 !~ “>” {c+=length($0);} END { print c; }’ > contig_lengths.txt
+cat reference.fa | awk '$0 ~ ">" {if (NR > 1) {print c;} c=0;printf substr($0,2,100) "\t"; } $0 !~ ">" {c+=length($0);} END { print c; }' > contig_lengths.txt
 
 # extend 3' UTRs, genes, and trascripts by set length (geneset.gtf > geneset.3ext.gtf)
 wget https://raw.githubusercontent.com/zamanianlab/Core_RNAseq-nf/master/auxillary/sc_scripts/gtf_process.R
