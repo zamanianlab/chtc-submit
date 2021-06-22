@@ -35,7 +35,7 @@ cat reference.fa | awk '$0 ~ ">" {if (NR > 1) {print c;} c=0;printf substr($0,2,
 
 # extend 3' UTRs, genes, and trascripts by set length (geneset.gtf > geneset.3ext.gtf)
 wget https://raw.githubusercontent.com/zamanianlab/Core_RNAseq-nf/master/auxillary/sc_scripts/gtf_process.R
-Rscript --vanilla gtf_process.R 0
+Rscript --vanilla gtf_process.R 500
 
 # make a filtered version of the gtf without any pseudogenes etc.
 cellranger mkgtf geneset.3ext.gtf geneset.cellranger.gtf \
@@ -70,4 +70,4 @@ cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
 rm -f /staging/groups/zamanian_group/output/$1.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1.tar /staging/groups/zamanian_group/output/$1.0.tar
+mv output/$1.tar /staging/groups/zamanian_group/output/$1.500.tar
