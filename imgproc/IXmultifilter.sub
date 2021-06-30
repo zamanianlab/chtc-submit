@@ -1,5 +1,5 @@
 # Input data: /staging/groups/zamanian_group/input/$(dir).tar
-# Run: condor_submit IXflow.sub script=IXmultifilter.sh
+# Run: condor_submit IXmultifilter.sub script=IXmultifilter.sh
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian

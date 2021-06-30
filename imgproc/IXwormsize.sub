@@ -1,5 +1,5 @@
 # Input data: /staging/groups/zamanian_group/input/$(dir).tar
-# Run: condor_submit IXflow.sub dir=2019XXXX-p01-NJW_63 script=IXflow.sh
+# Run: condor_submit IXwormsize.sub script=IXwormsize.sh
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian

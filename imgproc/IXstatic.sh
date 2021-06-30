@@ -21,13 +21,20 @@ cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd ..
 
 # get basename and plate IX metadata (from HTD file)
 base=`echo $1 | cut -d"_" -f1`
-time_points=`grep "TimePoints" input/$1/$base.HTD | cut -d',' -f2`
-columns=`grep "XWells" input/$1/$base.HTD | cut -d',' -f2`
-rows=`grep "YWells" input/$1/$base.HTD | cut -d',' -f2`
-x_sites=`grep "XSites" input/$1/$base.HTD | cut -d',' -f2`
-y_sites=`grep "YSites" input/$1/$base.HTD | cut -d',' -f2`
-NWavelengths=`grep "NWavelengths" input/$1/$base.HTD | cut -d',' -f2`
-WaveNames=`grep "WaveName" input/$1/$base.HTD | cut -d',' -f2`
+time_points=`grep "TimePoints" input/$1/$base.HTD | cut -d',' -f2 | sed 's/ //g' | sed 's/\r//g'`
+columns=`grep "XWells" input/$1/$base.HTD | cut -d',' -f2 | sed 's/ //g' | sed 's/\r//g'`
+rows=`grep "YWells" input/$1/$base.HTD | cut -d',' -f2 | sed 's/ //g' | sed 's/\r//g'`
+x_sites=`grep "XSites" input/$1/$base.HTD | cut -d',' -f2 | sed 's/ //g' | sed 's/\r//g'`
+y_sites=`grep "YSites" input/$1/$base.HTD | cut -d',' -f2 | sed 's/ //g' | sed 's/\r//g'`
+NWavelengths=`grep "NWavelengths" input/$1/$base.HTD | cut -d',' -f2 | sed 's/ //g' | sed 's/\r//g'`
+# iterate over all wavenames and concatenate into single string separated by "_"
+WaveNames=''
+for i in $(seq 1 $NWavelengths); do
+  WaveName=`grep "WaveName${i}" input/$1/$base.HTD | cut -d',' -f2 | sed 's/\"//g' | sed 's/ //g' | sed 's/\r//g'`
+  echo ${WaveName}
+  WaveNames="${WaveNames}${WaveName}_"
+done
+WaveNames=`echo $WaveNames | rev | cut -c 2- | rev`
 echo "base name: ${base}"
 echo "time_points: ${time_points}"
 echo "columns: ${columns}"
