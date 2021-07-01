@@ -23,19 +23,23 @@ prjn="PRJNA10729"
 prefix="ftp://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/${release}/species/${species}/${prjn}"
 
 echo '${prefix}'
-wget -c ${prefix}/${species}.${prjn}.${release}.canonical_geneset.gtf.gz -O work/geneset.gtf.gz
+#wget -c ${prefix}/${species}.${prjn}.${release}.canonical_geneset.gtf.gz -O work/geneset.gtf.gz
 wget -c ${prefix}/${species}.${prjn}.${release}.genomic.fa.gz -O work/reference.fa.gz
 
 cd work
 zcat reference.fa.gz > reference.fa
-zcat geneset.gtf.gz > geneset.gtf
+#zcat geneset.gtf.gz > geneset.gtf
 
 # create txt file with contig name and length
-cat reference.fa | awk '$0 ~ ">" {if (NR > 1) {print c;} c=0;printf substr($0,2,100) "\t"; } $0 !~ ">" {c+=length($0);} END { print c; }' > contig_lengths.txt
+#cat reference.fa | awk '$0 ~ ">" {if (NR > 1) {print c;} c=0;printf substr($0,2,100) "\t"; } $0 !~ ">" {c+=length($0);} END { print c; }' > contig_lengths.txt
 
 # extend 3' UTRs, genes, and trascripts by set length (geneset.gtf > geneset.3ext.gtf)
-wget https://raw.githubusercontent.com/zamanianlab/Core_RNAseq-nf/master/auxillary/sc_scripts/gtf_process.R
-Rscript --vanilla gtf_process.R 400
+#wget https://raw.githubusercontent.com/zamanianlab/Core_RNAseq-nf/master/auxillary/sc_scripts/gtf_process.R
+#Rscript --vanilla gtf_process.R 400
+
+# download new brugia annotated gtf with optimized gene extensions
+wget https://github.com/chenthorn/scRNAseq/blob/main/geneset.3ext.gtf.gz -O work/geneset.3ext.gtf.gz
+zcat geneset.3ext.gtf.gz > geneset.3ext.gtf
 
 # make a filtered version of the gtf without any pseudogenes etc.
 cellranger mkgtf geneset.3ext.gtf geneset.cellranger.gtf \
@@ -70,4 +74,4 @@ cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
 rm -f /staging/groups/zamanian_group/output/$1.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1.tar /staging/groups/zamanian_group/output/$1.400.tar
+mv output/$1.tar /staging/groups/zamanian_group/output/$1.tar
