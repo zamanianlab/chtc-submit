@@ -14,13 +14,13 @@ cp -r /staging/groups/zamanian_group/input/$1.tar input
 cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd $HOME
 
 # clone nextflow git repo
-git clone https://github.com/alceballosa/cw_onehealth_protocols.git
+git clone --branch nw https://github.com/alceballosa/cw_onehealth_protocols.git
 
 # run nextflow (QC, star)
 # export NXF_OPTS='-Xms1g -Xmx8g'
-nextflow self-update
-nextflow run covid_dsl2.nf -c cw_onehealth_protocols/covid.conf -w work \
-  -resume -with-report output/cov_report.html --source_folder input/$1  \
+nextflow run covid_cw_onehealth_protocols/dsl2.nf \
+  -c cw_onehealth_protocols/chtc-covid.conf -w work \
+  --source_folder input/$1 --output_folder output/$1 \
   --primers_folder cw_onehealth_protocols/primer_schemes/nCoV-2019/V3
 
 # rm files you don't want transferred back to /home/{net-id}
