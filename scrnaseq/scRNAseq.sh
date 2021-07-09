@@ -15,9 +15,6 @@ cd input/$1
 find . -type f ! -name '*.fastq.gz' -delete
 cd .. && cd ..
 
-# clone Core-scRNAseq repo from github and move extended gtf version to work folder
-git clone https://github.com/zamanianlab/Core_scRNAseq.git
-mv Core_scRNAseq/gtf/geneset.ext.gtf.gz work
 
 # download the genome and the brugia annotation gtf
 species="brugia_malayi"
@@ -30,8 +27,11 @@ echo '${prefix}'
 wget -c ${prefix}/${species}.${prjn}.${release}.genomic.fa.gz -O work/reference.fa.gz
 
 cd work
+# clone Core-scRNAseq repo from github
+git clone https://github.com/zamanianlab/Core_scRNAseq.git
+
 zcat reference.fa.gz > reference.fa
-zcat geneset.ext.gtf.gz > geneset.gtf
+zcat Core_scRNAseq/gtf/geneset.ext.gtf.gz > geneset.ext.gtf
 
 # create txt file with contig name and length
 # cat reference.fa | awk '$0 ~ ">" {if (NR > 1) {print c;} c=0;printf substr($0,2,100) "\t"; } $0 !~ ">" {c+=length($0);} END { print c; }' > contig_lengths.txt
