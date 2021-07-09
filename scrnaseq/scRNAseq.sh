@@ -17,7 +17,7 @@ cd .. && cd ..
 
 # clone Core-scRNAseq repo from github and move extended gtf version to work folder
 git clone https://github.com/zamanianlab/Core_scRNAseq.git
-mv Core/scRNAseq/gtf/geneset.ext.gtf.gz work
+mv Core_scRNAseq/gtf/geneset.ext.gtf.gz work
 
 # download the genome and the brugia annotation gtf
 species="brugia_malayi"
