@@ -15,6 +15,9 @@ cd input/$1
 find . -type f ! -name '*.fastq.gz' -delete
 cd .. && cd ..
 
+# clone Core-scRNAseq repo from github and move extended gtf version to work folder
+git clone https://github.com/zamanianlab/Core_scRNAseq.git
+mv Core/scRNAseq/gtf/geneset.ext.gtf.gz work
 
 # download the genome and the brugia annotation gtf
 species="brugia_malayi"
@@ -28,21 +31,18 @@ wget -c ${prefix}/${species}.${prjn}.${release}.genomic.fa.gz -O work/reference.
 
 cd work
 zcat reference.fa.gz > reference.fa
-#zcat geneset.gtf.gz > geneset.gtf
+zcat geneset.ext.gtf.gz > geneset.gtf
 
 # create txt file with contig name and length
-#cat reference.fa | awk '$0 ~ ">" {if (NR > 1) {print c;} c=0;printf substr($0,2,100) "\t"; } $0 !~ ">" {c+=length($0);} END { print c; }' > contig_lengths.txt
+# cat reference.fa | awk '$0 ~ ">" {if (NR > 1) {print c;} c=0;printf substr($0,2,100) "\t"; } $0 !~ ">" {c+=length($0);} END { print c; }' > contig_lengths.txt
 
 # extend 3' UTRs, genes, and trascripts by set length (geneset.gtf > geneset.3ext.gtf)
-#wget https://raw.githubusercontent.com/zamanianlab/Core_RNAseq-nf/master/auxillary/sc_scripts/gtf_process.R
-#Rscript --vanilla gtf_process.R 400
+# wget https://raw.githubusercontent.com/zamanianlab/Core_RNAseq-nf/master/auxillary/sc_scripts/gtf_process.R
+# Rscript --vanilla gtf_process.R 400
 
-# download new brugia annotated gtf with optimized gene extensions
-wget https://github.com/chenthorn/scRNAseq/blob/main/geneset.3ext.gtf.gz -O work/geneset.3ext.gtf.gz
-zcat geneset.3ext.gtf.gz > geneset.3ext.gtf
 
 # make a filtered version of the gtf without any pseudogenes etc.
-cellranger mkgtf geneset.3ext.gtf geneset.cellranger.gtf \
+cellranger mkgtf geneset.ext.gtf geneset.cellranger.gtf \
    --attribute=gene_biotype:protein_coding
 
 # cellranger make reference
