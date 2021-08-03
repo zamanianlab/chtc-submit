@@ -6,7 +6,7 @@ Accounting_Group = PathobiologicalSciences_Zamanian
 
 # load docker image; request execute server with large data staging
 universe = docker
-docker_image = zamanianlab/chtc-cwoh:v2
+docker_image = zamanianlab/chtc-cwoh:v3
 Requirements = (Target.HasCHTCStaging == true)
 
 # executable (/home/{net-id}/) and arguments
@@ -24,9 +24,9 @@ should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
 
 # memory, disk and CPU requests
-request_cpus = 40
-request_memory = 200GB
-request_disk = 2000GB
+request_cpus = 30
+request_memory = 100GB
+request_disk = 1000GB
 
 # submit 1 job
 queue 1

@@ -18,10 +18,11 @@ git clone --branch nw https://github.com/alceballosa/cw_onehealth_protocols.git
 
 # run nextflow (QC, star)
 # export NXF_OPTS='-Xms1g -Xmx8g'
-nextflow run covid_cw_onehealth_protocols/dsl2.nf \
-  -c cw_onehealth_protocols/chtc-covid.conf -w work \
-  --source_folder input/$1 --output_folder output/$1 \
-  --primers_folder cw_onehealth_protocols/primer_schemes/nCoV-2019/V3
+# nextflow -v
+ nextflow run cw_onehealth_protocols/covid_dsl2.nf \
+    -c cw_onehealth_protocols/covid-chtc.conf -w work \
+    --source_folder $HOME/input/$1 --output_folder $HOME/output/$1 \
+    --primers_folder cw_onehealth_protocols/protocol_input_files/primer_schemes/nCoV-2019/V3
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
