@@ -56,7 +56,7 @@ cd .. && cd output
 cellranger count --id=$1 \
                    --transcriptome=../work/$species \
                    --fastqs=../input/$1/ \
-                   --sample=tBM,utBM \
+                   --sample=utBM \
                    #--lanes=1 \
                   # --include-introns \
                   # --force-cells=10000 \
@@ -74,4 +74,4 @@ cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
 rm -f /staging/groups/zamanian_group/output/$1.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1.tar /staging/groups/zamanian_group/output/$1.tar
+mv output/$1.tar /staging/groups/zamanian_group/output/$1.utBM.tar
