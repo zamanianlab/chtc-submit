@@ -10,7 +10,7 @@ grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
 # transfer and decompress input data from staging ($1 is ${dir} from args)
-cp -r /staging/groups/zamanian_group/input/$1.tar input
+cp -r /staging/groups/CWOHC_data/input/$1.tar input
 cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd $HOME
 
 # clone nextflow git repo
@@ -31,7 +31,7 @@ rm -r work input
 cd output && tar -cvf $1.tar $1 && rm -r $1 && cd $HOME
 
 # remove staging output tar if there from previous run
-rm -f /staging/groups/zamanian_group/output/$1.tar
+rm -f /staging/groups/CWOHC_data/output/$1.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1.tar /staging/groups/zamanian_group/output/
+mv output/$1.tar /staging/groups/CWOHC_data/output/
