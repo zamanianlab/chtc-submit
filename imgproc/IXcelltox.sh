@@ -6,11 +6,11 @@ mkdir metadata
 # mkdir output/$1
 # mkdir work/$1
 
-git clone https://github.com/wheelern/CellProfiler_Pipelines.git
-mkdir CellProfiler_Pipelines/projects
-mkdir CellProfiler_Pipelines/projects/$1
-mkdir CellProfiler_Pipelines/projects/$1/raw_images
-input="CellProfiler_Pipelines/projects/$1/raw_images"
+git clone https://github.com/zamanianlab/Core_imgproc.git
+mkdir Core_imgproc/CP/projects
+mkdir Core_imgproc/CP/projects/$1
+mkdir Core_imgproc/CP/projects/$1/raw_images
+input="Core_imgproc/CP/projects/$1/raw_images"
 echo $input
 
 # echo core, thread, and memory
@@ -20,21 +20,28 @@ echo $(free -g)
 
 # transfer and decompress input data from staging ($1 is ${dir} from args)
 cp -r /staging/groups/zamanian_group/input/$1.tar $input
-cd $input && tar --strip-components 5 -xvf $1.tar && cd ../../../..
+cd $input && tar --strip-components 5 -xvf $1.tar && cd $HOME
 
 # transfer and decompress metadata from staging ($1 is ${dir} from args)
 cp -r /staging/groups/zamanian_group/metadata/$1.tar metadata
-cd metadata && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd ..
+cd metadata && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd $HOME
 
 # get basename and plate IX metadata (from HTD file)
 base=`echo $1 | cut -d"_" -f1`
-time_points=`grep "TimePoints" $input/$base.HTD | cut -d',' -f2`
-columns=`grep "XWells" $input/$base.HTD | cut -d',' -f2`
-rows=`grep "YWells" $input/$base.HTD | cut -d',' -f2`
-x_sites=`grep "XSites" $input/$base.HTD | cut -d',' -f2`
-y_sites=`grep "YSites" $input/$base.HTD | cut -d',' -f2`
-NWavelengths=`grep "NWavelengths" $input/$base.HTD | cut -d',' -f2`
-WaveNames=`grep "WaveName" $input/$base.HTD | cut -d',' -f2`
+time_points=`grep "TimePoints" input/$1/$base.HTD | cut -d',' -f2 | sed 's/ //g' | sed 's/\r//g'`
+columns=`grep "XWells" input/$1/$base.HTD | cut -d',' -f2 | sed 's/ //g' | sed 's/\r//g'`
+rows=`grep "YWells" input/$1/$base.HTD | cut -d',' -f2 | sed 's/ //g' | sed 's/\r//g'`
+x_sites=`grep "XSites" input/$1/$base.HTD | cut -d',' -f2 | sed 's/ //g' | sed 's/\r//g'`
+y_sites=`grep "YSites" input/$1/$base.HTD | cut -d',' -f2 | sed 's/ //g' | sed 's/\r//g'`
+NWavelengths=`grep "NWavelengths" input/$1/$base.HTD | cut -d',' -f2 | sed 's/ //g' | sed 's/\r//g'`
+# iterate over all wavenames and concatenate into single string separated by "_"
+WaveNames=''
+for i in $(seq 1 $NWavelengths); do
+  WaveName=`grep "WaveName${i}" input/$1/$base.HTD | cut -d',' -f2 | sed 's/\"//g' | sed 's/ //g' | sed 's/\r//g'`
+  echo ${WaveName}
+  WaveNames="${WaveNames}${WaveName}_"
+done
+WaveNames=`echo $WaveNames | rev | cut -c 2- | rev`
 echo "base name: ${base}"
 echo "time_points: ${time_points}"
 echo "columns: ${columns}"
@@ -45,14 +52,14 @@ echo "NWavelengths: ${NWavelengths}"
 echo "WaveNames: ${WaveNames}"
 
 # generate the CSV of files + metadata
-Rscript CellProfiler_Pipelines/scripts/generate_filelist_celltox.R $1
+Rscript Core_imgproc/CP/scripts/generate_filelist_celltox.R $1
 
 # run script
-cellprofiler -c -r -p CellProfiler_Pipelines/pipelines/mf_celltox.cppipe --data-file=CellProfiler_Pipelines/metadata/image_paths_celltox.csv
+cellprofiler -c -r -p Core_imgproc/CP/pipelines/mf_celltox.cppipe --data-file=Core_imgproc/CP/metadata/image_paths_celltox.csv
 
 # join metatdata, tar output folder, and delete it
 mv metadata output
-Rscript CellProfiler_Pipelines/scripts/metadata_join_celltox.R $1
+Rscript Core_imgproc/CP/scripts/metadata_join_celltox.R $1
 rm -r output/metadata
 mv output $1
 tar -cvf $1.tar $1 && rm -r $1
