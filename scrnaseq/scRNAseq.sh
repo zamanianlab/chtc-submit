@@ -11,7 +11,9 @@ cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structu
 #cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
 
 # rm non-fastq files from input directory
-cd input/$1
+cd input/scRNAseq_combinedfastqs_CRH/210518_BH7FNCDRXY
+find . -type f ! -name '*.fastq.gz' -delete && cd ..
+cd input/scRNAseq_combinedfastqs_CRH/210823_AHFLVNDRXY
 find . -type f ! -name '*.fastq.gz' -delete
 cd .. && cd ..
 
@@ -55,7 +57,8 @@ cellranger mkref --nthreads 60 \
 cd .. && cd output
 cellranger count --id=$1 \
                    --transcriptome=../work/$species \
-                   --fastqs=../input/$1/ \
+                   #--fastqs=../input/$1/ \
+                   --fastqs=../input/scRNAseq_combinedfastqs_CRH/210823_AHFLVNDRXY/,../input/scRNAseq_combinedfastqs_CRH/210518_BH7FNCDRXY/ \
                    --sample=utBM \
                    #--lanes=1 \
                   # --include-introns \
@@ -65,7 +68,7 @@ cellranger count --id=$1 \
 cd ..
 
 # rm files you don't want transferred back to /home/{net-id}
-rm -r work input output/210518_BH7FNCDRXY/outs/*.bam
+rm -r work input output/$1/outs/*.bam
 
 # tar output folder and delete it
 cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
