@@ -13,8 +13,8 @@ cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structu
 # rm non-fastq files from input directory
 cd input/scRNAseq_combinedfastqs_CRH/210518_BH7FNCDRXY
 find . -type f ! -name '*.fastq.gz' -delete && cd ..
-cd input/scRNAseq_combinedfastqs_CRH/210823_AHFLVNDRXY
-find . -type f ! -name '*.fastq.gz' -delete
+cd 210823_AHFLVNDRXY
+find . -type f ! -name '*.fastq.gz' -delete && cd ..
 cd .. && cd ..
 
 
