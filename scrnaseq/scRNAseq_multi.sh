@@ -3,16 +3,24 @@
 # set home () and mk dirs
 export HOME=$PWD
 mkdir input work output
-mkdir output/$1
+mkdir output/$3
 
-# transfer and decompress input data from staging ($1 is ${dir} from args)
+# transfer and decompress input data from staging
+#($1 is ${dir1} from args); ($2 is ${dir2} from args);
 cp -r /staging/groups/zamanian_group/input/$1.tar input
 cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
+
+cp -r /staging/groups/zamanian_group/input/$2.tar input
+cd input && tar -xvf $2.tar && rm $2.tar && mv */*/* $2 && cd .. #for RD structure
 
 
 # rm non-fastq files from input directory
 cd input/$1
+find . -type f ! -name '*.fastq.gz' -delete cd ..
+
+cd input/$2
 find . -type f ! -name '*.fastq.gz' -delete
+
 cd .. && cd ..
 
 # download the genome and the brugia annotation gtf
@@ -52,9 +60,9 @@ cellranger mkref --nthreads 60 \
 
 # run cellranger
 cd .. && cd output
-cellranger count --id=$1 \
+cellranger count --id=$3 \
                    --transcriptome=../work/$species \
-                   --fastqs=../input/$1/ \
+                   --fastqs=../input/$1/,../input/$2/ \
                    --sample=utBM \
                    #--lanes=1 \
                   # --include-introns \
@@ -64,13 +72,13 @@ cellranger count --id=$1 \
 cd ..
 
 # rm files you don't want transferred back to /home/{net-id}
-rm -r work input output/$1/outs/*.bam
+rm -r work input output/$3/outs/*.bam
 
 # tar output folder and delete it
-cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
+cd output && tar -cvf $3.tar $3 && rm -r $3 && cd ..
 
 # remove staging output tar if there from previous run
-rm -f /staging/groups/zamanian_group/output/$1.tar
+rm -f /staging/groups/zamanian_group/output/$3.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1.tar /staging/groups/zamanian_group/output/$1.utBM.tar
+mv output/$3.tar /staging/groups/zamanian_group/output/$3.tar
