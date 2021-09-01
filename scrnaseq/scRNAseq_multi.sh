@@ -18,7 +18,7 @@ cd input && tar -xvf $2.tar && rm $2.tar && mv */*/* $2 && cd .. #for RD structu
 cd input/$1
 find . -type f ! -name '*.fastq.gz' -delete cd ..
 
-cd input/$2
+cd $2
 find . -type f ! -name '*.fastq.gz' -delete
 
 cd .. && cd ..
