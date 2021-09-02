@@ -8,10 +8,10 @@ mkdir output/$3
 # transfer and decompress input data from staging
 #($1 is ${dir1} from args); ($2 is ${dir2} from args);
 cp -r /staging/groups/zamanian_group/input/$1.tar input
-cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
+cd input && tar -xvf $1.tar && rm $1.tar && mv */*/*/ $1 && cd .. #for RD structure
 
 cp -r /staging/groups/zamanian_group/input/$2.tar input
-cd input && tar -xvf $2.tar && rm $2.tar && mv */*/* $2 && cd .. #for RD structure
+cd input && tar -xvf $2.tar && rm $2.tar && mv */*/*/ $2 && cd .. #for RD structure
 
 
 # rm non-fastq files from input directory
