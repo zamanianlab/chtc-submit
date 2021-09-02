@@ -63,7 +63,7 @@ cd .. && cd output
 cellranger count --id=$3 \
                    --transcriptome=../work/$species \
                    --fastqs=../input/$1/,../input/$2/ \
-                   --sample=utBM \
+                   --sample=tBM \
                    #--lanes=1 \
                   # --include-introns \
                   # --force-cells=10000 \
