@@ -14,7 +14,7 @@ cp -r /staging/groups/CWOHC_data/input/$1.tar input
 cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd $HOME
 
 # clone nextflow git repo
-git clone --branch nw https://github.com/alceballosa/cw_onehealth_protocols.git
+git clone https://github.com/alceballosa/cw_onehealth_protocols.git
 
 # run nextflow (QC, star)
 # export NXF_OPTS='-Xms1g -Xmx8g'
