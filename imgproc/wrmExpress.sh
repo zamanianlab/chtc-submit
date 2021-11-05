@@ -7,7 +7,7 @@ mkdir metadata
 mkdir output/
 mkdir work/
 
-git clone https://github.com/zamanianlab/Core_imgproc.git
+git --branch packagify clone https://github.com/zamanianlab/Core_imgproc.git
 
 # echo core, thread, and memory
 echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
