@@ -20,7 +20,7 @@ git clone https://github.com/zamanianlab/Phylogenetics.git
 # echo $(ls -lh)
 
 # run script
-bash Phylogenetics/Tocris/pipeline.sh
+bash Phylogenetics/Tocris/pipeline.sh $1
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
