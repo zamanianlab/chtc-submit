@@ -14,9 +14,9 @@ executable = $(script)
 # arguments = $(dir)
 
 # log, error, and output files
-log = phylo_$(Cluster)_$(Process).log
-error = phylo_$(Cluster)_$(Process).err
-output = phylo_$(Cluster)_$(Process).out
+log = $(dir)_$(Cluster)_$(Process).log
+error = $(dir)_$(Cluster)_$(Process).err
+output = $(dir)_$(Cluster)_$(Process).out
 
 # transfer files in-out of /home/{net-id}/
 transfer_input_files =
@@ -29,5 +29,8 @@ request_memory = 256GB
 request_disk = 500GB
 
 # submit 1 job
-queue 1
+# queue 1
+
+# submit a job for each directory in dir_list.txt
+queue dir from tar_list.txt
 ### END
