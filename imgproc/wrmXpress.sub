@@ -1,0 +1,35 @@
+# Input data: /staging/groups/zamanian_group/input/$(plate).tar
+# Parametrs: $HOME/$(plate).yml
+# Run: condor_submit wrmXpress.sub script=wrmXpress.sh plate=20211105-p01-EJG_948
+
+# request Zamanian Lab server
+Accounting_Group = PathobiologicalSciences_Zamanian
+
+# load docker image; request execute server with large data staging
+universe = docker
+docker_image = zamanianlab/chtc-imgproc:v7
+Requirements = (Target.HasCHTCStaging == true)
+
+# executable (/home/{net-id}/) and arguments
+executable = $(script)
+arguments = $(plate)
+
+# log, error, and output files
+log = $(plate)_$(Cluster)_$(Process).log
+error = $(plate)_$(Cluster)_$(Process).err
+output = $(plate)_$(Cluster)_$(Process).out
+
+# transfer files in-out of /home/{net-id}/
+transfer_input_files = $(plate).yml
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+# memory, disk and CPU requests
+request_cpus = 1
+request_memory = 8GB
+request_disk = 10GB
+
+# submit a job for each directory in dir_list.txt
+# queue 1
+queue plate from plate_list.txt
+### END
