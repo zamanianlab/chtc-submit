@@ -26,10 +26,10 @@ bash Phylogenetics/Tocris/pipeline.sh
 rm -r work input
 
 # tar output folder and delete it
-tar -cvf tocris.tar output && rm -r output
+tar -cvf $1.tar output && rm -r output
 
 # remove staging output tar if there from previous run
-rm -f /staging/groups/zamanian_group/output/tocris.tar
+rm -f /staging/groups/zamanian_group/output/$1.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv tocris.tar /staging/groups/zamanian_group/output/
+mv $1.tar /staging/groups/zamanian_group/output/
