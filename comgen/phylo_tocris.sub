@@ -13,9 +13,9 @@ executable = $(script)
 arguments = $(target)
 
 # log, error, and output files
-log = $(dir)_$(Cluster)_$(Process).log
-error = $(dir)_$(Cluster)_$(Process).err
-output = $(dir)_$(Cluster)_$(Process).out
+log = $(target)_$(Cluster)_$(Process).log
+error = $(target)_$(Cluster)_$(Process).err
+output = $(target)_$(Cluster)_$(Process).out
 
 # transfer files in-out of /home/{net-id}/
 transfer_input_files =
