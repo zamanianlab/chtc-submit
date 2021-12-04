@@ -68,7 +68,7 @@ Para_final=output/5_Para_final
 
 # Get IDs and sequences of hits
 echo $1 > output/temp.line.txt
-seqtk subseq $proteomes/HsUniProt_nr.fasta output/temp.line.txt > $seeds/Hs_seeds.target.fasta
+seqtk subseq $proteomes/HsUniProt_nr.fasta $1 > $seeds/Hs_seeds.$1.fasta
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
