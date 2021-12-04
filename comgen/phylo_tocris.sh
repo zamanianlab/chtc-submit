@@ -20,7 +20,11 @@ git clone https://github.com/zamanianlab/Phylogenetics.git
 # echo $(ls -lh)
 
 # run script
-bash Phylogenetics/Tocris/pipeline.sh
+#bash Phylogenetics/Tocris/pipeline.sh
+
+#insert pipeline
+echo $1 > output/temp.line.txt
+#seqtk subseq $proteomes/HsUniProt_nr.fasta output/temp.line.txt > $seeds/Hs_seeds.target.fasta
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
