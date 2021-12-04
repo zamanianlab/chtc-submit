@@ -77,10 +77,10 @@ seqtk subseq $proteomes/HsUniProt_nr.fasta output/temp.line.txt > $seeds/Hs_seed
 rm -r work input
 
 # tar output folder and delete it
-tar -cvf $1.tar output && rm -r output
+tar -cvf $line_sub.tar output && rm -r output
 
 # remove staging output tar if there from previous run
-rm -f /staging/groups/zamanian_group/output/$1.tar
+rm -f /staging/groups/zamanian_group/output/$line_sub.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv $1.tar /staging/groups/zamanian_group/output/
+mv $line_sub.tar /staging/groups/zamanian_group/output/
