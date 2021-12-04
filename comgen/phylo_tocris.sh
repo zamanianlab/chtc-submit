@@ -52,10 +52,10 @@ makeblastdb -in $proteomes/HsUniProt_nr.fasta -dbtype prot
 
 # set up directories and move files
 mv Phylogenetics/Tocris/Hs_seeds.list.txt work
-mkdir output/1_Hs_seeds
-seeds=output/1_Hs_seeds
-mkdir work/2_Hs_targets
-Hs_targets=work/2_Hs_targets
+mkdir work/1_Hs_seeds
+seeds=work/1_Hs_seeds
+mkdir output/2_Hs_targets
+Hs_targets=output/2_Hs_targets
 mkdir output/alignments
 alignments=output/alignments
 mv Phylogenetics/Tocris/parasite_db.list.txt work
@@ -68,10 +68,16 @@ Para_final=output/5_Para_final
 
 # Get IDs and sequences of hits
 printf '%s\n' $1
-echo $1 > output/temp.line.txt
+echo $1 > work/temp.line.txt
 line_sub=$(echo $1 | awk 'BEGIN { FS = "|" } ; { print $3 }')
-seqtk subseq $proteomes/HsUniProt_nr.fasta output/temp.line.txt > $seeds/Hs_seeds.$line_sub.fasta
-# rm work/temp.line.txt
+seqtk subseq $proteomes/HsUniProt_nr.fasta work/temp.line.txt > $seeds/Hs_seeds.$line_sub.fasta
+rm work/temp.line.txt
+
+# blast seed to human proteome to expand targets
+blastp -query $seeds/Hs_seeds."$line_sub".fasta -db $proteomes/HsUniProt_nr.fasta -out $Hs_targets/"$line_sub".out -outfmt 6 -max_hsps 1 -evalue 1E-3 -num_threads 4
+cat $Hs_targets/"$line_sub".out | awk '$3>30.000 && $11<1E-3 {print $2}' | sort | uniq > $Hs_targets/"$line_sub".list.txt
+seqtk subseq $proteomes/HsUniProt_nr.fasta $Hs_targets/"$line_sub".list.txt > $Hs_targets/"$line_sub".ext.fasta
+rm $Hs_targets/*.out
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
