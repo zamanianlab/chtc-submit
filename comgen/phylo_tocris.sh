@@ -9,10 +9,6 @@ echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
 grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
-# transfer and decompress input data from staging ($1 is ${dir} from args)
-# cp -r /staging/groups/zamanian_group/input/$1.tar $HOME
-# cd $HOME && tar -xvf $1.tar && rm $1.tar
-
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/Phylogenetics.git
 
@@ -20,10 +16,10 @@ git clone https://github.com/zamanianlab/Phylogenetics.git
 # echo $(ls -lh)
 
 # run script
-#bash Phylogenetics/Tocris/pipeline.sh
+bash Phylogenetics/Tocris/pipeline.sh
 
 #insert pipeline
-echo $1 > output/temp.line.txt
+#echo $1 > output/temp.line.txt
 #seqtk subseq $proteomes/HsUniProt_nr.fasta output/temp.line.txt > $seeds/Hs_seeds.target.fasta
 
 # rm files you don't want transferred back to /home/{net-id}
