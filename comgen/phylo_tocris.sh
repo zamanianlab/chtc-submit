@@ -2,7 +2,11 @@
 
 # set home () and mk dirs
 export HOME=$PWD
-mkdir input work "$1"_output
+mkdir input work
+printf '%s\n' $1
+echo $1 > work/temp.line.txt
+line_sub=$(echo $1 | awk 'BEGIN { FS = "|" } ; { print $3 }')
+mkdir "$line_sub"_output
 
 # echo core, thread, and memory
 echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
@@ -56,20 +60,17 @@ mkdir work/1_Hs_seeds
 seeds=work/1_Hs_seeds
 mkdir work/2_Hs_targets
 Hs_targets=work/2_Hs_targets
-mkdir output/alignments
-alignments=output/alignments
+mkdir "$line_sub"_output/alignments
+alignments="$line_sub"_output/alignments
 mv Phylogenetics/Tocris/parasite_db.list.txt work
 mkdir work/3_Para_targets
 Para_targets=work/3_Para_targets
 mkdir work/4_Para_recip
 Para_recip=work/4_Para_recip
-mkdir output/5_Para_final
-Para_final=output/5_Para_final
+mkdir "$line_sub"_output/5_Para_final
+Para_final="$line_sub"_output/5_Para_final
 
 # Get IDs and sequences of hits
-printf '%s\n' $1
-echo $1 > work/temp.line.txt
-line_sub=$(echo $1 | awk 'BEGIN { FS = "|" } ; { print $3 }')
 seqtk subseq $proteomes/HsUniProt_nr.fasta work/temp.line.txt > $seeds/Hs_seeds.$line_sub.fasta
 rm work/temp.line.txt
 
@@ -106,7 +107,7 @@ done < work/parasite_db.list.txt
 rm -r work input
 
 # tar output folder and delete it
-tar -cvf $line_sub.tar "$1"_output && rm -r "$1"_output
+tar -cvf $line_sub.tar "$line_sub"_output && rm -r "$line_sub"_output
 
 # remove staging output tar if there from previous run
 rm -f /staging/groups/zamanian_group/output/"$line_sub".tar
