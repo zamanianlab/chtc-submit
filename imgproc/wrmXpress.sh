@@ -28,7 +28,7 @@ tar -xf /staging/groups/zamanian_group/metadata/$1.tar -C metadata
 # cd metadata && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd $HOME
 
 # run the wrapper
-python Core_imgproc/wrapper.py $1.yml $1
+python wrmXpress/wrapper.py $1.yml $1
 
 # tar output folder and delete it
 mv output $1
