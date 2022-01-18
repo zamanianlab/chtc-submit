@@ -29,5 +29,5 @@ request_memory = 64GB
 request_disk = 15GB
 
 # submit 1 job
-queue 1
+ queue 1
 ### END
