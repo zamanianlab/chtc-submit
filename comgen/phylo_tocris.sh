@@ -2,6 +2,7 @@
 
 # set home () and mk dirs
 export HOME=$PWD
+mkdir input work output
 
 # echo core, thread, and memory
 echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
