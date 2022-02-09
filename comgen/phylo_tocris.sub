@@ -31,5 +31,5 @@ request_disk = 100GB
 # queue 1
 
 # submit a job for each directory in tar_list.txt
-queue target from tar_list.txt
+queue target from Hs_seeds.txt
 ### END
