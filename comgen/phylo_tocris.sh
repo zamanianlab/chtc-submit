@@ -9,6 +9,11 @@ echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
 grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
+# split target ID
+printf '%s\n' $1
+echo $1 > work/Hs_seeds.txt
+Hs_target=$(echo $1 | awk 'BEGIN { FS = "|" } ; { print $3 }')
+
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/Phylogenetics.git
 
