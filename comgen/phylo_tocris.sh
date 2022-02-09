@@ -2,11 +2,6 @@
 
 # set home () and mk dirs
 export HOME=$PWD
-mkdir input work
-printf '%s\n' $1
-echo $1 > work/temp.line.txt
-line_sub=$(echo $1 | awk 'BEGIN { FS = "|" } ; { print $3 }')
-mkdir "$line_sub"_output
 
 # echo core, thread, and memory
 echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
