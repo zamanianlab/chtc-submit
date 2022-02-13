@@ -27,7 +27,7 @@ bash Phylogenetics/Tocris/pipeline.sh $line_sub
 rm -r work input
 
 # tar output folder and delete it
-tar -cvf $line_sub.tar "$line_sub"_output && rm -r "$line_sub"_output
+tar -cvf $line_sub.tar output && rm -r output
 
 # remove staging output tar if there from previous run
 rm -f /staging/groups/zamanian_group/output/"$line_sub".tar
