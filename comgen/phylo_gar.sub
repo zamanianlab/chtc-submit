@@ -1,4 +1,4 @@
-# Run: condor_submit phylo_tocris.sub script=phylo_tocris.sh
+# Run: condor_submit phylo_gar.sub script=phylo_gar.sh
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
@@ -23,6 +23,10 @@ should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
 
 # memory, disk and CPU requests
-request_cpus = 20
+request_cpus = 5
 request_memory = 64GB
 request_disk = 500GB
+
+# submit 1 job
+queue 1
+### END

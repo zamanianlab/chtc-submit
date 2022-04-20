@@ -9,6 +9,8 @@ echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
 grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
+# split target ID
+line_sub='GAR'
 
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/Phylogenetics.git
@@ -17,7 +19,7 @@ git clone https://github.com/zamanianlab/Phylogenetics.git
 # echo $(ls -lh)
 
 # run script
-bash Phylogenetics/GAR/pipeline.sh
+bash Phylogenetics/GAR/pipeline.sh $line_sub
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
