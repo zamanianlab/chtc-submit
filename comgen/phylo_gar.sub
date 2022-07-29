@@ -1,4 +1,4 @@
-# Run: condor_submit phylo_tocris.sub script=phylo_tocris.sh
+# Run: condor_submit phylo_gar.sub script=phylo_gar.sh
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
@@ -28,8 +28,5 @@ request_memory = 64GB
 request_disk = 500GB
 
 # submit 1 job
-# queue 1
-
-# submit a job for each directory in tar_list.txt
-queue target from Hs_seeds.txt
+queue 1
 ### END

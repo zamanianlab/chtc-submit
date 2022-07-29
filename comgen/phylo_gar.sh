@@ -10,9 +10,7 @@ grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
 # split target ID
-printf '%s\n' $1
-echo $1 > work/Hs_seeds.txt
-line_sub=$(echo $1 | awk 'BEGIN { FS = "|" } ; { print $3 }')
+line_sub='GAR'
 
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/Phylogenetics.git
@@ -21,7 +19,7 @@ git clone https://github.com/zamanianlab/Phylogenetics.git
 # echo $(ls -lh)
 
 # run script
-bash Phylogenetics/Tocris/pipeline.sh $line_sub
+bash Phylogenetics/GAR/pipeline.sh $line_sub
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
