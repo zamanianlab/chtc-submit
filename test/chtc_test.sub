@@ -1,21 +1,20 @@
-# Run: condor_submit phylo_gar.sub script=phylo_gar.sh
+# Run: condor_submit chtc_test.sub script=chtc_test.sh
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
 
 # load docker image; request execute server with large data staging
-universe = docker
-docker_image = zamanianlab/chtc-comgen:v4
+#universe = docker
+#docker_image = zamanianlab/chtc-comgen:v4
 Requirements = (Target.HasCHTCStaging == true)
 
 # executable (/home/{net-id}/) and arguments
 executable = $(script)
-arguments = $(target)
 
 # log, error, and output files
-log = $(target)_$(Cluster)_$(Process).log
-error = $(target)_$(Cluster)_$(Process).err
-output = $(target)_$(Cluster)_$(Process).out
+log = $(Cluster)_$(Process).log
+error = $(Cluster)_$(Process).err
+output = $(Cluster)_$(Process).out
 
 # transfer files in-out of /home/{net-id}/
 transfer_input_files =
