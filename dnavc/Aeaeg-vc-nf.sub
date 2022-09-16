@@ -1,5 +1,5 @@
 # Input data: /staging/groups/zamanian_group/input/$(dir).tar
-# Run: condor_submit Aeaeg-vc-nf.sub dir=201105_AHLVWJDSXY script=Aeaeg-vc-nf.sh
+# Run: condor_submit Aeaeg-vc-nf.sub dir=220223_BH7NGKDSX3 script=Aeaeg-vc-nf.sh
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
@@ -24,7 +24,7 @@ should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
 
 # memory, disk and CPU requests
-request_cpus = 40
+request_cpus = 20
 request_memory = 256GB
 request_disk = 1500GB
 
