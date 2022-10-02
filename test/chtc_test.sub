@@ -1,4 +1,4 @@
-# Run: condor_submit chtc_test.sub script=chtc_test.sh
+# Run: condor_submit chtc_test.sub
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
@@ -6,10 +6,11 @@ Accounting_Group = PathobiologicalSciences_Zamanian
 # load docker image; request execute server with large data staging
 #universe = docker
 #docker_image = zamanianlab/chtc-comgen:v4
-Requirements = (Target.HasCHTCStaging == true)
+Requirements = (Target.HasCHTCStaging == true) && \
+               (OpSysMajorVer == 7) || (OpSysMajorVer == 8)
 
 # executable (/home/{net-id}/) and arguments
-executable = $(script)
+executable = chtc_test.sh
 
 # log, error, and output files
 log = $(Cluster)_$(Process).log
@@ -22,9 +23,9 @@ should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
 
 # memory, disk and CPU requests
-request_cpus = 1
+request_cpus = 2
 request_memory = 8GB
-request_disk = 10GB
+request_disk = 100GB
 
 # submit 1 job
 queue 1
