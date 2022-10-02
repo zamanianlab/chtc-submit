@@ -1,5 +1,5 @@
 # Input data: /staging/groups/zamanian_group/input/$(dir).tar
-# Run: condor_submit Aeaeg-vc-nf.sub dir=220223_BH7NGKDSX3 script=Aeaeg-vc-nf.sh
+# Run: condor_submit Aeaeg-vc-nf.sub dir=220223_BH7NGKDSX3
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
@@ -7,10 +7,11 @@ Accounting_Group = PathobiologicalSciences_Zamanian
 # load docker image; request execute server with large data staging
 universe = docker
 docker_image = zamanianlab/chtc-dnavc:v1
-Requirements = (Target.HasCHTCStaging == true)
+Requirements = (Target.HasCHTCStaging == true) && \
+               (OpSysMajorVer == 7) || (OpSysMajorVer == 8)
 
 # executable (/home/{net-id}/) and arguments
-executable = $(script)
+executable = Aeaeg-vc-nf.sh
 arguments = $(dir)
 
 # log, error, and output files
@@ -25,7 +26,7 @@ when_to_transfer_output = ON_EXIT
 
 # memory, disk and CPU requests
 request_cpus = 20
-request_memory = 256GB
+request_memory = 128GB
 request_disk = 1500GB
 
 # submit 1 job
