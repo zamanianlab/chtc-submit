@@ -14,7 +14,7 @@ echo $(free -g)
 #cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for globus RD structure
 
 # clone nextflow git repo
-git clone https://github.com/zamanianlab/DNAseq-index-nf.git
+git clone https://github.com/zamanianlab/DNAseq-VC-nf.git
 
 # run nextflow (QC, star)
 export NXF_OPTS='-Xms1g -Xmx8g'
