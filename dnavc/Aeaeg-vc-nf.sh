@@ -15,7 +15,7 @@ cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for globus RD structure
 
 # transfer and decompress mosquito genome index data from staging 
 cp -r /staging/groups/zamanian_group/input/Aeaegypti_ref.tar input
-cd input && tar -xvf Aeaegypti_ref.tar && Aeaegypti_ref.tar && cd ..
+cd input && tar -xvf Aeaegypti_ref.tar && rm Aeaegypti_ref.tar && cd ..
 
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/DNAseq-VC-nf.git
