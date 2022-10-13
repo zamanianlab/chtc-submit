@@ -22,8 +22,7 @@ git clone https://github.com/zamanianlab/DNAseq-VC-nf.git
 
 # run nextflow (QC, star)
 export NXF_OPTS='-Xms1g -Xmx8g'
-nextflow run DNAseq-VC-nf/Aeaeg-vc.nf -w work -c DNAseq-VC-nf/chtc.config --dir $1\
-  --rlen "150"
+nextflow run DNAseq-VC-nf/Aeaeg-vc.nf -w work -c DNAseq-VC-nf/chtc.config --dir $1 --rlen "150" --qc
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
