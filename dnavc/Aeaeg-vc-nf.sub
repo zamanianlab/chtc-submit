@@ -29,6 +29,9 @@ request_cpus = 40
 request_memory = 256GB
 request_disk = 1500GB
 
+# for jobs > 72 hours
++LongJob = true
+
 # submit 1 job
 queue 1
 ### END
