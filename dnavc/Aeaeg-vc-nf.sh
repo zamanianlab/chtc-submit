@@ -16,8 +16,7 @@ cp -r /staging/groups/zamanian_group/input/$2.tar input
 cd input && tar -xvf $2.tar && rm $2.tar && cd ..
 
 # transfer fastq files to a common input folder (fqs)
-cd input && mkdir fqs
-mv $1/*.gz fqs && mv $2/*.gz fqs
+cd input && mkdir fqs && mv $1/*.gz fqs && mv $2/*.gz fqs && cd ..
 
 # transfer and decompress mosquito genome index data from staging 
 cp -r /staging/groups/zamanian_group/input/Aeaegypti_ref.tar input
