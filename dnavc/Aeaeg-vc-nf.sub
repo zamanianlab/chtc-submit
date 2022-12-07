@@ -1,5 +1,5 @@
 # Input data: /staging/groups/zamanian_group/input/$(dir).tar
-# Run: condor_submit Aeaeg-vc-nf.sub dir=220223_BH7NGKDSX3_sub
+# Run: condor_submit Aeaeg-vc-nf.sub dir1=220223_BH7NGKDSX3_sub dir2=220308_BH7M7GDSX3_sub
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
@@ -12,12 +12,12 @@ Requirements = (Target.HasCHTCStaging == true) && \
 
 # executable (/home/{net-id}/) and arguments
 executable = Aeaeg-vc-nf.sh
-arguments = $(dir)
+arguments = $(dir1) $(dir2)
 
 # log, error, and output files
-log = $(dir)_$(Cluster)_$(Process).log
-error = $(dir)_$(Cluster)_$(Process).err
-output = $(dir)_$(Cluster)_$(Process).out
+log = $(dir1)_$(dir2)_$(Cluster)_$(Process).log
+error = $(dir1)_$(dir2)_$(Cluster)_$(Process).err
+output = $(dir1)_$(dir2)_$(Cluster)_$(Process).out
 
 # transfer files in-out of /home/{net-id}/
 transfer_input_files =
@@ -30,7 +30,7 @@ request_memory = 256GB
 request_disk = 1500GB
 
 # for jobs > 72 hours
-+LongJob = true
+#+LongJob = true
 
 # submit 1 job
 queue 1
