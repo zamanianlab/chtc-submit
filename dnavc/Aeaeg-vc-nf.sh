@@ -27,16 +27,16 @@ git clone https://github.com/zamanianlab/DNAseq-VC-nf.git
 
 # run nextflow (QC, star)
 export NXF_OPTS='-Xms1g -Xmx8g'
-nextflow run DNAseq-VC-nf/Aeaeg-vc.nf -w work -c DNAseq-VC-nf/chtc.config --dir $1_$2 --rlen "150" --qc
+nextflow run DNAseq-VC-nf/Aeaeg-vc.nf -w work -c DNAseq-VC-nf/chtc.config --dir dnavc --rlen "150" --qc
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
 
 # tar output folder and delete it
-cd output && tar -cvf $1_$2.tar $1_$2 && rm -r $1_$2 && cd ..
+cd output && tar -cvf dnavc.tar dnavc && rm -r dnavc && cd ..
 
 # remove staging output tar if there from previous run
-rm -f /staging/groups/zamanian_group/output/$1_$2.tar
+rm -f /staging/groups/zamanian_group/output/dnavc.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1_$2.tar /staging/groups/zamanian_group/output/
+mv output/dnavc.tar /staging/groups/zamanian_group/output/
