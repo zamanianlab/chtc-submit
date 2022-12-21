@@ -1,5 +1,5 @@
 # Input data: /staging/groups/zamanian_group/input/$(dir).tar
-# Run: condor_submit Aeaeg-vc-nf.sub
+# Run: condor_submit Aeaeg-vc-nf.sub 220223_BH7NGKDSX3_sub 220308_BH7M7GDSX3_sub
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
@@ -12,7 +12,7 @@ Requirements = (Target.HasCHTCStaging == true) && \
 
 # executable (/home/{net-id}/) and arguments
 executable = Aeaeg-vc-nf.sh
-arguments = 220223_BH7NGKDSX3_sub 220308_BH7M7GDSX3_sub
+arguments = $(dir1) $(dir2)
 
 # log, error, and output files
 log = $(Cluster)_$(Process).log
