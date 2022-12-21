@@ -1,5 +1,5 @@
 # Input data: /staging/groups/zamanian_group/input/$(dir).tar
-# Run: condor_submit Aeaeg-vc-nf.sub 220223_BH7NGKDSX3_sub 220308_BH7M7GDSX3_sub
+# Run: condor_submit Aeaeg-vc-nf.sub dir1=220223_BH7NGKDSX3_sub dir2=220308_BH7M7GDSX3_sub
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
