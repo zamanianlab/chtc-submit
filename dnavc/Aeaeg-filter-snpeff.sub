@@ -11,7 +11,7 @@ Requirements = (Target.HasCHTCStaging == true) && \
                (OpSysMajorVer == 7) || (OpSysMajorVer == 8)
 
 # executable (/home/{net-id}/) and arguments
-executable = Aeaeg-vc-nf.sh
+executable = Aeaeg-filter-snpeff.sh
 arguments = $(file)
 
 # log, error, and output files
