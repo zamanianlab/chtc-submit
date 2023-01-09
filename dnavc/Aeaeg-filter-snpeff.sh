@@ -13,8 +13,8 @@ echo $(free -g)
 cp -r /staging/groups/zamanian_group/input/$1 input
 
 # transfer and decompress mosquito genome index data from staging 
-cp -r /staging/groups/zamanian_group/input/Aeaegypti_ref.tar input
-cd input && tar -xvf Aeaegypti_ref.tar && rm Aeaegypti_ref.tar && cd ..
+# cp -r /staging/groups/zamanian_group/input/Aeaegypti_ref.tar input
+# cd input && tar -xvf Aeaegypti_ref.tar && rm Aeaegypti_ref.tar && cd ..
 
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/DNAseq-VC-nf.git

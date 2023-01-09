@@ -1,5 +1,5 @@
 # Input data: /staging/groups/zamanian_group/input/$(file)  output.vcf.gz
-# Run: condor_submit Aeaeg-filter-snpeff.sub file=output.vcf.gz
+# Run: condor_submit Aeaeg-filter-snpeff.sub file='output.vcf.gz'
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
