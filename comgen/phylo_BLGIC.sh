@@ -10,7 +10,7 @@ grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
 # split target ID
-line_sub='BAR'
+line_sub='BLGIC'
 
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/Phylogenetics.git
