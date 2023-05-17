@@ -1,4 +1,4 @@
-# Run: condor_submit phylo_bar.sub script=phylo_bar.sh
+# Run: condor_submit phylo_thermoreceptors.sub script=phylo_thermoreceptors.sh
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
