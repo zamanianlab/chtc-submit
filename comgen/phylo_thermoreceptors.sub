@@ -1,7 +1,7 @@
 # Run: condor_submit phylo_thermoreceptors.sub script=phylo_thermoreceptors.sh
 
 # request Zamanian Lab server
-Accounting_Group = PathobiologicalSciences_Zamanian
+Accounting_Group = PathobiologicalSci_Zamanian
 
 # load docker image; request execute server with large data staging
 universe = docker
