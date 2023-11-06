@@ -6,12 +6,11 @@ Accounting_Group = PathobiologicalSciences_Zamanian
 
 # load docker image; request execute server with large data staging
 universe = docker
-docker_image = zamanianlab/chtc-dnavc:v1
-Requirements = (Target.HasCHTCStaging == true) && \
-               (OpSysMajorVer == 7) || (OpSysMajorVer == 8)
+docker_image = zamanianlab/chtc-rnaseq:v1
+Requirements = (Target.HasCHTCStaging == true) 
 
 # executable (/home/{net-id}/) and arguments
-executable = $(script)
+executable = $(script)/Users/clairhenthorn/GitHub/chtc-submit/RNAseq/Core_RNAseq-nf.sub
 arguments = $(dir)
 
 # log, error, and output files
@@ -25,8 +24,8 @@ should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
 
 # memory, disk and CPU requests
-request_cpus = 40
-request_memory = 200GB
+request_cpus = 60
+request_memory = 400GB
 request_disk = 1500GB
 
 # submit 1 job
