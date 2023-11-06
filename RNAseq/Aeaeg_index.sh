@@ -14,11 +14,12 @@ echo $(free -g)
 #cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for globus RD structure
 
 # clone nextflow git repo
-git clone https://github.com/zamanianlab/Core_RNAseq-nf.git
+git clone https://github.com/zamanianlab/Core_RNAseq-nf.git 
+cd Core_RNAseq-nf
 
 # run nextflow (QC, star)
 export NXF_OPTS='-Xms1g -Xmx8g'
-nextflow run Core_RNASeq-nf/Ae-index.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1 --rlen 150
+nextflow run Ae-index.nf -w work -c chtc.config --dir $1 --rlen 150
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
