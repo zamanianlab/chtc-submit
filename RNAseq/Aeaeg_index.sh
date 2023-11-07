@@ -19,7 +19,7 @@ cd Core_RNAseq-nf
 
 # run nextflow (QC, star)
 export NXF_OPTS='-Xms1g -Xmx8g'
-nextflow run Ae-index.nf -w work -c chtc.config --dir $1 --rlen 150
+nextflow run Ae-index.nf -w work -c chtc.config --dir $1 --rlen "150"
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
