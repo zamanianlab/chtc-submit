@@ -9,7 +9,7 @@ echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
 grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
-# transfer and decompress input data from staging ($1 is ${dir1}, $2 is ${dir2} from args)
+# transfer and decompress input data from staging ($1 is ${dir}, $2 is ${aedesgenome} from args)
 cp -r /staging/groups/zamanian_group/input/$1.tar input
 cd input && tar -xvf $1.tar && rm $1.tar && cd ..
 
@@ -26,7 +26,7 @@ git clone https://github.com/zamanianlab/RNAseq-VC-nf.git
 
 # run nextflow (QC, star)
 export NXF_OPTS='-Xms1g -Xmx8g'
-nextflow run RNAseq-VC-nf/Aeaeg-rnavc.nf -w work -c RNAseq-VC-nf/chtc.config --dir $1 --rlen "150" --qc
+nextflow run RNAseq-VC-nf/call_variants.nf -w work -c RNAseq-VC-nf/chtc.config --dir $1 --aedesgenome $2
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
