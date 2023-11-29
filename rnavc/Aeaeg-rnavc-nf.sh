@@ -13,10 +13,6 @@ echo $(free -g)
 cp -r /staging/groups/zamanian_group/input/$1.tar input
 cd input && tar -xvf $1.tar && rm $1.tar && cd ..
 
-
-# transfer fastq files to a common input folder (fqs)
-cd input && mkdir fqs && mv $1/*.gz && cd ..
-
 # transfer and decompress mosquito genome index data from staging 
 cp -r /staging/groups/zamanian_group/input/$2.tar input
 cd input && tar -xvf $2.tar && rm $2.tar && cd ..
