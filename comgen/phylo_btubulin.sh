@@ -19,7 +19,7 @@ git clone https://github.com/zamanianlab/Phylogenetics.git
 # echo $(ls -lh)
 
 # run script
-bash Phylogenetics/butublin/pipeline.sh $line_sub
+bash Phylogenetics/btubulin/pipeline.sh $line_sub
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
