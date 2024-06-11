@@ -20,8 +20,9 @@ git clone https://github.com/zamanianlab/Core_RNAseq-nf.git
 # run nextflow (QC, star) for Diro workflow
 export NXF_OPTS='-Xms1g -Xmx8g'
 nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1\
-#  --star --release "WBPS15" --species "brugia_malayi" --prjn "PRJNA10729" --rlen "150"
    --star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJEB1797" --rlen "150"
+#  --star --release "WBPS15" --species "brugia_malayi" --prjn "PRJNA10729" --rlen "150"
+
 
 
 # run nextflow (QC, star) for Aedes workflow
