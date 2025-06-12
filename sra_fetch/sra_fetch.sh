@@ -5,6 +5,10 @@ cp -r /staging/groups/zamanian_group/input/accession_list.txt work
 cd work
 
 while read -r acc; do
+  acc=$(echo "$acc" | xargs)  # strips leading/trailing whitespace
+  
+  echo "$acc"
+  
   prefetch "$acc" -O sra_files
 
   fasterq-dump "output/sra_reads/$acc.sra" -O . --split-files 
