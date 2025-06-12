@@ -5,7 +5,7 @@ Accounting_Group = PathobiologicalSciences_Zamanian
 
 # load docker image
 universe = docker
-docker_image = ncbi/sra-tools
+docker_image = quay.io/biocontainers/sra-tools:3.2.1--h4304569_0
 Requirements = (Target.HasCHTCStaging == true)
 
 # executable (/home/egarncarz/) and arguments
