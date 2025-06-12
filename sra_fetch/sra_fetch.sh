@@ -26,10 +26,9 @@ cd ..
 rm -r work input
 
 # Tar output and name it sra_reads.tar
-cd sra_files_output
-tar -cvf sra_reads.tar output
+tar -cvf sra_reads.tar sra_files_output
 # Remove the original output
-rm -r output
+rm -r sra_files_output
 
 # Return root
 cd ..
