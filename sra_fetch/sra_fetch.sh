@@ -7,11 +7,12 @@ cd work
 while read -r acc; do
   acc=$(echo "$acc" | xargs)  # strips leading/trailing whitespace
   
-  echo "$acc"
-  
-  prefetch "$acc" -O sra_files
+  prefetch "$acc"    # no -O
+  fasterq-dump "$acc" --split-files -O .
 
-  fasterq-dump "sra_files/$acc.sra" -O . --split-files 
+  # echo "$acc"
+  # prefetch "$acc" -O sra_files
+  # fasterq-dump "sra_files/$acc.sra" -O . --split-files 
 
   # Move resulting FASTQ files to the output directory (one level up)
   mv "${acc}"_*.fastq ../output/ 2>/dev/null
