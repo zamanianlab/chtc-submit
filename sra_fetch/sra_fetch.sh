@@ -11,7 +11,10 @@ while read -r acc; do
   
   prefetch "$acc" -O sra_files
 
-  fasterq-dump "output/sra_reads/$acc.sra" -O . --split-files 
+  fasterq-dump "sra_files/$acc.sra" -O . --split-files 
+
+  # Move resulting FASTQ files to the output directory (one level up)
+  mv "${acc}"_*.fastq ../output/ 2>/dev/null
 
 done < accession_list.txt
 
@@ -22,9 +25,9 @@ rm -r work input
 cd output && tar -cvf sra_reads.tar sra_reads && rm -r sra_reads && cd ..
 
 # remove staging output tar if there from previous run
-rm -f /staging/groups/zamanian_group/output/$1.tar
+rm -f /staging/groups/zamanian_group/output/sra_reads.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1.tar /staging/groups/zamanian_group/output/
+mv output/sra_reads.tar /staging/groups/zamanian_group/output/
 
 #move the output into a different folder named sra
