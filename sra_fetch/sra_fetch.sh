@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir input work output
+mkdir input work sra_files_output
 
 cp -r /staging/groups/zamanian_group/input/accession_list.txt work
 cd work
@@ -15,21 +15,29 @@ while read -r acc; do
   # fasterq-dump "sra_files/$acc.sra" -O . --split-files 
 
   # Move resulting FASTQ files to the output directory (one level up)
-  mv "${acc}"_*.fastq ../output/ 2>/dev/null
+  mv "${acc}"_*.fastq ../sra_files_output/ 2>/dev/null
 
 done < accession_list.txt
 
-# rm files you don't want transferred back to /home/{net-id}
+# Go back to root
 cd ..
+
+# Remove input + work directories
 rm -r work input
 
-# tar output folder and delete it
-cd output && tar -cvf sra_reads.tar sra_reads && rm -r sra_reads && cd ..
+# Tar output and name it sra_reads.tar
+cd sra_files_output
+tar -cvf sra_reads.tar output
+# Remove the original output
+rm -r output
+
+# Return root
+cd ..
 
 # remove staging output tar if there from previous run
 rm -f /staging/groups/zamanian_group/output/sra_reads.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/sra_reads.tar /staging/groups/zamanian_group/output/
+mv sra_reads.tar /staging/groups/zamanian_group/output/
 
 #move the output into a different folder named sra
