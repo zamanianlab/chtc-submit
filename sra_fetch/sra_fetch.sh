@@ -7,7 +7,7 @@ cd work
 while read -r acc; do
   prefetch "$acc" -O sra_files
 
-  fasterq-dump "output/$acc/$acc.sra" -O . --split-files 
+  fasterq-dump "output/sra_reads/$acc.sra" -O . --split-files 
 
 done < accession_list.txt
 
@@ -15,7 +15,7 @@ done < accession_list.txt
 rm -r work input
 
 # tar output folder and delete it
-cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
+cd output && tar -cvf sra_reads.tar sra_reads && rm -r sra_reads && cd ..
 
 # remove staging output tar if there from previous run
 rm -f /staging/groups/zamanian_group/output/$1.tar
