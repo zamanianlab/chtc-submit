@@ -30,9 +30,6 @@ tar -cvf sra_reads.tar sra_files_output
 # Remove the original output
 rm -r sra_files_output
 
-# Return root
-cd ..
-
 # remove staging output tar if there from previous run
 rm -f /staging/groups/zamanian_group/output/sra_reads.tar
 
