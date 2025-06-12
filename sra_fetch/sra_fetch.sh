@@ -19,6 +19,7 @@ while read -r acc; do
 done < accession_list.txt
 
 # rm files you don't want transferred back to /home/{net-id}
+cd ..
 rm -r work input
 
 # tar output folder and delete it
