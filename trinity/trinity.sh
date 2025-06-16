@@ -13,9 +13,9 @@ tar -xf sra_reads.tar
 cd sra_files_output
 
 # Run Trinity
-  Trinity --seqType fq --max_memory 10G \
-  --left /data/ \
-  --right /data/ \
+Trinity --seqType fq --max_memory 10G \
+  --left /data/SRR3110748_1.fastq,/data/SRR3111433_1.fastq \
+  --right /data/SRR3110748_2.fastq,/data/SRR3111433_2.fastq \
   --CPU 4 --output /data/trinity_out_dir
 
 # Compress the Trinity output directory
