@@ -16,23 +16,11 @@ cd sra_files_output
 LEFT_READS=$(ls *_1.fastq | paste -sd,)
 RIGHT_READS=$(ls *_2.fastq | paste -sd,)
 
-# Run Trinity via Apptainer with proper paths
-apptainer run \
-  --bind $(pwd):/data \
-  docker://trinityrnaseq/trinityrnaseq \
-  Trinity --seqType fq --max_memory 10G \
-  --left /data/${LEFT_READS} \
-  --right /data/${RIGHT_READS} \
-  --CPU 4 --output /data/trinity_out_dir
-
 # Run Trinity
-# docker run -it --rm \
-#   -v "$(pwd)":/data \
-#   trinityrnaseq/trinityrnaseq \
-#   Trinity --seqType fq --max_memory 10G \
-#   --left /data/sra_files_output/${LEFT_READS} \
-#   --right /data/sra_files_output/${RIGHT_READS} \
-#   --CPU 4 --output /data/trinity_out_dir
+  Trinity --seqType fq --max_memory 10G \
+  --left /data/sra_files_output/${LEFT_READS} \
+  --right /data/sra_files_output/${RIGHT_READS} \
+  --CPU 4 --output /data/trinity_out_dir
 
 # Compress the Trinity output directory
 tar -czf trinity_out_dir.tar.gz trinity_out_dir
