@@ -1,40 +1,43 @@
 #!/bin/bash
-mkdir input work output
 
+# Set up working structure
+mkdir -p input work output
+
+# Copy input archive to work directory
 cp -r /staging/groups/zamanian_group/input/sra_reads.tar work
 cd work
 
-#unzip the tar of input files
+# Unzip the tar of input files
 tar -xf sra_reads.tar
 
 cd sra_files_output
 
-# make a comma-separated list of left reads
+# Create comma-separated lists of read files
 LEFT_READS=$(ls *_1.fastq | paste -sd,)
-
-# make a comma-separated list of right reads
 RIGHT_READS=$(ls *_2.fastq | paste -sd,)
 
-#copy the lists to the work directory
-cp -r ${LEFT_READS//,/ } ../work
-cp -r ${RIGHT_READS//,/ } ../work
-
-# go back to the work directory
-cd ..
+# Run Trinity via Apptainer with proper paths
+apptainer run \
+  --bind $(pwd):/data \
+  docker://trinityrnaseq/trinityrnaseq \
+  Trinity --seqType fq --max_memory 10G \
+  --left /data/${LEFT_READS} \
+  --right /data/${RIGHT_READS} \
+  --CPU 4 --output /data/trinity_out_dir
 
 # Run Trinity
-docker run -it --rm \
-  -v "$(pwd)":/data \
-  trinityrnaseq/trinityrnaseq \
-  Trinity --seqType fq --max_memory 10G \
-  --left /data/sra_files_output/${LEFT_READS} \
-  --right /data/sra_files_output/${RIGHT_READS} \
-  --CPU 4 --output /data/trinity_out_dir
+# docker run -it --rm \
+#   -v "$(pwd)":/data \
+#   trinityrnaseq/trinityrnaseq \
+#   Trinity --seqType fq --max_memory 10G \
+#   --left /data/sra_files_output/${LEFT_READS} \
+#   --right /data/sra_files_output/${RIGHT_READS} \
+#   --CPU 4 --output /data/trinity_out_dir
 
 # Compress the Trinity output directory
 tar -czf trinity_out_dir.tar.gz trinity_out_dir
 
-mv trinity_out_dir.tar.gz ../output/
+mv trinity_out_dir.tar.gz ../../output/
 
 # Go back to root
 cd ..
