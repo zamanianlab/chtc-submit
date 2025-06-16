@@ -1,4 +1,4 @@
-# Run: condor_submit denovo_assembly.sub sra_list=sra_list.txt project = bpahangi_rna script=denovo_assembly.sh
+# Run: condor_submit trinity.sub script=trinity.sh
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
