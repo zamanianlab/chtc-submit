@@ -16,6 +16,8 @@ cd sra_files_output
 LEFT_READS=$(ls *_1.fastq | paste -sd,)
 RIGHT_READS=$(ls *_2.fastq | paste -sd,)
 
+cp -r LEFT_READS ../../
+
 # Run Trinity
   Trinity --seqType fq --max_memory 10G \
   --left /data/sra_files_output/${LEFT_READS} \
