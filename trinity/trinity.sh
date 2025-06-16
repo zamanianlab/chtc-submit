@@ -7,19 +7,28 @@ cd work
 #unzip the tar of input files
 tar -xf sra_reads.tar
 
+cd sra_files_output
+
 # make a comma-separated list of left reads
 LEFT_READS=$(ls *_1.fastq | paste -sd,)
 
 # make a comma-separated list of right reads
 RIGHT_READS=$(ls *_2.fastq | paste -sd,)
 
+#copy the lists to the work directory
+cp -r LEFT_READS work
+cp -r RIGHT_READS work
+
+# go back to the work directory
+cd ..
+
 # Run Trinity
 docker run -it --rm \
   -v "$(pwd)":/data \
   trinityrnaseq/trinityrnaseq \
   Trinity --seqType fq --max_memory 10G \
-  --left /data/${LEFT_READS} \
-  --right /data/${RIGHT_READS} \
+  --left /data/sra_files_output/${LEFT_READS} \
+  --right /data/sra_files_output/${RIGHT_READS} \
   --CPU 4 --output /data/trinity_out_dir
 
 # Compress the Trinity output directory
