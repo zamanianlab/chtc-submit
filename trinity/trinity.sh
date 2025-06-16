@@ -1,7 +1,7 @@
 #!/bin/bash
 mkdir input work output
 
-cp -r /staging/groups/zamanian_group/input/sra_files.tar work
+cp -r /staging/groups/zamanian_group/input/sra_reads.tar work
 cd work
 
 #unzip the tar of input files
