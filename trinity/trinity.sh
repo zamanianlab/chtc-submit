@@ -4,15 +4,28 @@ mkdir input work output
 cp -r /staging/groups/zamanian_group/input/sra_files.tar work
 cd work
 
+#unzip the tar of input files
+tar -xf sra_files.tar
+
+# make a comma-separated list of left reads
+LEFT_READS=$(ls *_1.fastq | paste -sd,)
+
+# make a comma-separated list of right reads
+RIGHT_READS=$(ls *_2.fastq | paste -sd,)
+
 # Run Trinity
 docker run -it --rm \
-  -v pwd:/data \
+  -v "$(pwd)":/data \
   trinityrnaseq/trinityrnaseq \
   Trinity --seqType fq --max_memory 10G \
-  --left /data/*_1.fastq \
-  --right /data/*_2.fastq \
+  --left /data/${LEFT_READS} \
+  --right /data/${RIGHT_READS} \
   --CPU 4 --output /data/trinity_out_dir
 
+# Compress the Trinity output directory
+tar -czf trinity_out_dir.tar.gz trinity_out_dir
+
+mv trinity_out_dir.tar.gz ../output/
 
 # Go back to root
 cd ..
@@ -21,7 +34,8 @@ cd ..
 rm -r work input
 
 # Tar output and name it sra_reads.tar
-tar -cvf trinity_ouput.tar output
+tar -cvf trinity_output.tar output
+
 # Remove the original output
 rm -r output
 
