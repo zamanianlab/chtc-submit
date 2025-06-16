@@ -16,8 +16,8 @@ LEFT_READS=$(ls *_1.fastq | paste -sd,)
 RIGHT_READS=$(ls *_2.fastq | paste -sd,)
 
 #copy the lists to the work directory
-cp -r LEFT_READS work
-cp -r RIGHT_READS work
+cp -r ${LEFT_READS//,/ } ../work
+cp -r ${RIGHT_READS//,/ } ../work
 
 # go back to the work directory
 cd ..
