@@ -5,7 +5,7 @@ cp -r /staging/groups/zamanian_group/input/sra_reads.tar work
 cd work
 
 #unzip the tar of input files
-tar -xf sra_files.tar
+tar -xf sra_reads.tar
 
 # make a comma-separated list of left reads
 LEFT_READS=$(ls *_1.fastq | paste -sd,)
