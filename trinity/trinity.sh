@@ -12,16 +12,10 @@ tar -xf sra_reads.tar
 
 cd sra_files_output
 
-# Create comma-separated lists of read files
-LEFT_READS=$(ls *_1.fastq | paste -sd,)
-RIGHT_READS=$(ls *_2.fastq | paste -sd,)
-
-cp -r LEFT_READS ../../
-
 # Run Trinity
   Trinity --seqType fq --max_memory 10G \
-  --left /data/sra_files_output/${LEFT_READS} \
-  --right /data/sra_files_output/${RIGHT_READS} \
+  --left /data/ \
+  --right /data/ \
   --CPU 4 --output /data/trinity_out_dir
 
 # Compress the Trinity output directory
