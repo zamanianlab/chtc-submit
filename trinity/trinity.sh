@@ -14,8 +14,8 @@ cd sra_files_output
 
 # Run Trinity
 Trinity --seqType fq --max_memory 10G \
-  --left SRR3110748_1.fastq,SRR3111433_1.fastq \
-  --right SRR3110748_2.fastq,SRR3111433_2.fastq \
+  --left SRR3110748_1.fastq,SRR3111433_1.fastq,SRR3111490_1.fastq \
+  --right SRR3110748_2.fastq,SRR3111433_2.fastq,SRR3111490_2.fastq \
   --CPU 4 --output trinity_out_dir
 
 # Compress the Trinity output directory
