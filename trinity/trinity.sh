@@ -24,7 +24,7 @@ tar -czf trinity_out_dir.tar.gz trinity_out_dir
 mv trinity_out_dir.tar.gz ../../output/
 
 # Go back to root
-cd ..
+cd ../../
 
 # Remove input + work directories
 rm -r work input
