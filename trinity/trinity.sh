@@ -36,7 +36,7 @@ tar -cvf trinity_output.tar output
 rm -r output
 
 # remove staging output tar if there from previous run
-rm -f /staging/groups/zamanian_group/output/trinity_ouput.tar
+rm -f /staging/groups/zamanian_group/output/trinity_output.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv trinity_ouput.tar /staging/groups/zamanian_group/output/
+mv trinity_output.tar /staging/groups/zamanian_group/output/
