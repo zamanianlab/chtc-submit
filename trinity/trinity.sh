@@ -19,9 +19,9 @@ Trinity --seqType fq --max_memory 10G \
   --CPU 4 --output trinity_out_dir
 
 # Compress the Trinity output directory
-tar -czf trinity_out_dir.tar.gz trinity_out_dir
+tar -czf trinity_out_dir.tar trinity_out_dir
 
-mv trinity_out_dir.tar.gz ../../output/
+mv trinity_out_dir.tar ../../output/
 
 # Go back to root
 cd ../../
