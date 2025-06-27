@@ -25,7 +25,7 @@ when_to_transfer_output = ON_EXIT
 # memory, disk and CPU requests
 request_cpus = 10
 request_memory = 100GB
-request_disk = 200GB
+request_disk = 1TB
 
 # submit 1 job
 queue 1
