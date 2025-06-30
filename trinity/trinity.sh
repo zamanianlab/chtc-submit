@@ -24,7 +24,7 @@ cd ..
 # Compress the Trinity output directory
 tar -czf sra_files_output.tar trinity_out
 
-mv trinity_out_dir.tar ../../output/
+mv trinity_out.tar ../../output/
 
 # Go back to root
 cd ../../
