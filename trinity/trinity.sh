@@ -18,8 +18,11 @@ Trinity --seqType fq --max_memory 10G \
   --right SRR3110748_2.fastq,SRR3111433_2.fastq,SRR3111490_2.fastq,SRR3111494_2.fastq,SRR7825596_2.fastq,SRR7825597_2.fastq,SRR3111497_2.fastq,SRR3111501_2.fastq \
   --CPU 4 --output trinity_out_dir
 
+# go back to sra_files_output
+cd ..
+
 # Compress the Trinity output directory
-tar -czf trinity_out_dir.tar trinity_out_dir
+tar -czf sra_files_output.tar trinity_out
 
 mv trinity_out_dir.tar ../../output/
 
