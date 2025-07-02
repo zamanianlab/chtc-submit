@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set up working structure
-mkdir -p input work output
+mkdir -p input work
 
 # Copy input archive to work directory
 cp -r /staging/groups/zamanian_group/input/sra_reads.tar work
@@ -21,22 +21,17 @@ Trinity --seqType fq --max_memory 10G \
 # go back to sra_files_output
 cd ..
 
-# Compress the Trinity output directory
-tar -czf sra_files_output.tar trinity_out
+# go back to work
+cd ..
 
-mv trinity_out.tar ../../output/
+# go back to root
+cd ..
 
-# Go back to root
-cd ../../
+# Compress the whole work directory and name it trinity_output
+tar -czf trinity_output.tar work
 
-# Remove input + work directories
+# Remove input + work + output directories
 rm -r work input
-
-# Tar output and name it sra_reads.tar
-tar -cvf trinity_output.tar output
-
-# Remove the original output
-rm -r output
 
 # remove staging output tar if there from previous run
 rm -f /staging/groups/zamanian_group/output/trinity_output.tar
