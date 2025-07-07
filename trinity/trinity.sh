@@ -18,9 +18,6 @@ Trinity --seqType fq --max_memory 10G \
   --right SRR3110748_2.fastq,SRR3111433_2.fastq,SRR3111490_2.fastq,SRR3111494_2.fastq,SRR7825596_2.fastq,SRR7825597_2.fastq,SRR3111497_2.fastq,SRR3111501_2.fastq \
   --CPU 4 --output trinity_out_dir
 
-# go back to sra_files_output
-cd ..
-
 # go back to work
 cd ..
 
@@ -30,7 +27,7 @@ cd ..
 # Compress the whole work directory and name it trinity_output
 tar -czf trinity_output.tar work
 
-# Remove input + work + output directories
+# Remove input + work directories
 rm -r work input
 
 # remove staging output tar if there from previous run
