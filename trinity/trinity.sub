@@ -1,5 +1,8 @@
 # Run: condor_submit trinity.sub script=trinity.sh
 
+# long jobs (2 weeks)
++LongJob = true
+
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
 
