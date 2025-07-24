@@ -7,7 +7,7 @@ Accounting_Group = PathobiologicalSciences_Zamanian
 
 # load docker image; request execute server with large data staging
 universe = docker
-docker_image = zamanianlab/chtc-wrmxpress:v7
+docker_image = zamanianlab/chtc-wrmxpress:v8
 Requirements = (Target.HasCHTCStaging == true)
 
 # executable (/home/{net-id}/) and arguments
