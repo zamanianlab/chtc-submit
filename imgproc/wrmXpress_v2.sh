@@ -1,14 +1,8 @@
 #!/bin/bash
 
 # set home () and mk dirs
-cd .. && cd home
-export HOME=$PWD
-mkdir input
-mkdir metadata
-mkdir output
-mkdir work
-
-git clone -b v2.0 https://github.com/zamanianlab/wrmXpress.git
+cd home && export HOME=$PWD
+mkdir input metadata output work
 
 # echo core, thread, and memory
 echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
