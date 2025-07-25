@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # set home () and mk dirs
-ls && cd /home
 export HOME=$PWD
 mkdir input metadata output work
 
@@ -11,7 +10,7 @@ grep 'cpu cores' /proc/cpuinfo | uniq
 echo $(free -g)
 
 # transfer and decompress input data from staging ($1 is ${dir} from args)
-tar -xf /staging/groups/zamanian_group/input/$1.tar -C input/
+tar -xf /staging/groups/zamanian_group/input/$1.tar -C input
 
 # transfer and decompress metadata from staging ($1 is ${dir} from args)
 tar -xf /staging/groups/zamanian_group/metadata/$1.tar -C metadata
