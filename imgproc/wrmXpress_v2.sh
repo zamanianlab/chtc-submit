@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # set home () and mk dirs
-cd home && export HOME=$PWD
+cd .. && ch home
+export HOME=$PWD
 mkdir input metadata output work
 
 # echo core, thread, and memory

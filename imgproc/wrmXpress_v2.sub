@@ -1,6 +1,8 @@
 # Input data: /staging/groups/zamanian_group/input/$(plate).tar
-# Parametrs: $HOME/$(plate).yml
-# Run: condor_submit wrmXpress.sub script=wrmXpress.sh plate=20211105-p01-EJG_948
+# Metadata: /staging/groups/zamanian_group/metadata/$(plate).tar
+# Parameters: $HOME/$(plate).yml
+# Plate list: $HOME/plate_list.txt
+# Run: condor_submit chtc-submit/imgproc/wrmXpress_v2.sub script=chtc-submit/imgproc/wrmXpress_v2.sh
 
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
