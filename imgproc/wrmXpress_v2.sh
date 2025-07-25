@@ -16,7 +16,7 @@ tar -xf /staging/groups/zamanian_group/input/$1.tar -C input
 tar -xf /staging/groups/zamanian_group/metadata/$1.tar -C metadata
 
 # run the wrapper
-python /root/wrmXpress/wrapper.py $1.yml $1
+python /opt/wrmXpress/wrapper.py $1.yml $1
 
 # tar output folder and delete it
 mv output $1
