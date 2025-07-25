@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set home () and mk dirs
+# set home (/scratch) and mk dirs
 export HOME=$PWD
 mkdir input metadata output work
 
