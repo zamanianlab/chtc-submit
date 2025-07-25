@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set home () and mk dirs
-ls && cd .. && cd home
+ls && cd /home
 export HOME=$PWD
 mkdir input metadata output work
 
