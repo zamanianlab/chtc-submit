@@ -1,45 +1,33 @@
-#!/bin/bash
+# Input data: /staging/groups/zamanian_group/input/$(dir).tar
+# Run: condor_submit Core_RNAseq-nf.sub dir=201105_AHLVWJDSXY script=Core_RNAseq-nf.sh
 
-# set home () and mk dirs
-export HOME=$PWD
-mkdir input work output
+# request Zamanian Lab server
+Accounting_Group = PathobiologicalSciences_Zamanian
 
-# echo core, thread, and memory
-echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
-grep 'cpu cores' /proc/cpuinfo | uniq
-echo $(free -g)
+# load docker image; request execute server with large data staging
+universe = docker
+docker_image = zamanianlab/chtc-rnaseq:v1
+Requirements = (Target.HasCHTCStaging == true)
 
-# transfer and decompress input data from staging ($1 is ${dir} from args)
-cp -r /staging/groups/zamanian_group/input/$1.tar input
-#cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
-cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
+# executable (/home/{net-id}/) and arguments
+executable = $(script)
+arguments = $(dir)
 
-# clone nextflow git repo
-git clone https://github.com/zamanianlab/Core_RNAseq-nf.git
+# log, error, and output files
+log = $(dir)_$(Cluster)_$(Process).log
+error = $(dir)_$(Cluster)_$(Process).err
+output = $(dir)_$(Cluster)_$(Process).out
 
-# run nextflow (QC, star) for Diro workflow
-export NXF_OPTS='-Xms1g -Xmx8g'
-nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1\
-   --star --release "WBPS19" --species "schistosoma_mansoni" --prjn "PRJEA36577" --rlen "50"
-#   --star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJNA723804" --rlen "150"
-#  --star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJEB1797" --rlen "150"
-#  --star --release "WBPS15" --species "brugia_malayi" --prjn "PRJNA10729" --rlen "150"
+# transfer files in-out of /home/{net-id}/
+transfer_input_files =
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
 
+# memory, disk and CPU requests
+request_cpus = 60
+request_memory = 400GB
+request_disk = 1500GB
 
-
-# run nextflow (QC, star) for Aedes workflow
-#export NXF_OPTS='-Xms1g -Xmx8g'
-#nextflow run Core_RNAseq-nf/Ae-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1 --rlen "150"\
-
-
-# rm files you don't want transferred back to /home/{net-id}
-rm -r work input
-
-# tar output folder and delete it
-cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
-
-# remove staging output tar if there from previous run
-rm -f /staging/groups/zamanian_group/output/$1.tar
-
-# mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1.tar /staging/groups/zamanian_group/output/
+# submit 1 job
+queue 1
+### END
