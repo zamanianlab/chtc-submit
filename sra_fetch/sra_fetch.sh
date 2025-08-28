@@ -31,7 +31,7 @@ tar -cvf sra_reads.tar sra_files_output
 rm -r sra_files_output
 
 # remove staging output tar if there from previous run
-rm -f /staging/groups/zamanian_group/input/sra_reads.tar
+rm -f /staging/groups/zamanian_group/output/sra_reads.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
 mv sra_reads.tar /staging/groups/zamanian_group/output/
