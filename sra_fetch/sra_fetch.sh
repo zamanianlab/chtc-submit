@@ -1,7 +1,10 @@
 #!/bin/bash
 mkdir input work sra_files_output
 
-cp -r /staging/groups/zamanian_group/input/accession_list.txt work
+accession_list=$(ls /staging/groups/zamanian_group/input/*_acc_list.txt)
+basename=$(basename "$accession_list" .txt)
+
+cp -r "$accession_list" work
 cd work
 
 while read -r acc; do
@@ -25,15 +28,18 @@ cd ..
 # Remove input + work directories
 rm -r work input
 
-# Tar output and name it sra_reads.tar
-tar -cvf sra_reads.tar sra_files_output
+# Tar output and name it whatever you named your accession list.txt but its a .tar
+tar -cvf "${basename}.tar" sra_files_output
+
 # Remove the original output
 rm -r sra_files_output
 
 # remove staging output tar if there from previous run
-rm -f /staging/groups/zamanian_group/output/sra_reads.tar
+rm -f /staging/groups/zamanian_group/output/"${basename}.tar"
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv sra_reads.tar /staging/groups/zamanian_group/output/
+mv "${basename}.tar" /staging/groups/zamanian_group/output/
 
-#move the output into a different folder named sra
+# Optional: move the output into a folder named "sra"
+# mkdir -p sra
+# mv "/staging/groups/zamanian_group/output/${basename}.tar" sra/
