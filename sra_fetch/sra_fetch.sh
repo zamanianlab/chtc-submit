@@ -2,7 +2,7 @@
 mkdir input work sra_files_output
 
 accession_list=$(ls /staging/groups/zamanian_group/input/*_acc_list.txt)
-basename=$(basename "$accession_list" .txt)
+basename=$(basename "$accession_list" .txt | sed 's/_acc_list$//')
 
 cp -r "$accession_list" work
 cd work
