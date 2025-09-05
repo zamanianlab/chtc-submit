@@ -3,6 +3,9 @@
 # request Zamanian Lab server
 Accounting_Group = PathobiologicalSciences_Zamanian
 
+# long jobs (2 weeks)
++LongJob = true
+
 # load docker image
 universe = docker
 docker_image = quay.io/biocontainers/sra-tools:3.2.1--h4304569_0
