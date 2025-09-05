@@ -1,10 +1,10 @@
 # Run: condor_submit sra_fetch.sub project = "bpahangi_rna" sra_list=sra_list.txt script=sra_fetch.sh
 
-# request Zamanian Lab server
-Accounting_Group = PathobiologicalSciences_Zamanian
-
 # long jobs (2 weeks)
 +LongJob = true
+
+# request Zamanian Lab server
+Accounting_Group = PathobiologicalSciences_Zamanian
 
 # load docker image
 universe = docker
