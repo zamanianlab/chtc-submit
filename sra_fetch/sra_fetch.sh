@@ -37,8 +37,8 @@ rm -r sra_files_output
 # remove staging output tar if there from previous run
 rm -f /staging/groups/zamanian_group/output/"${basename}.tar"
 
-# mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv "${basename}.tar" /staging/groups/zamanian_group/output/
+# mv large output files to staging input folder; avoid their transfer back to /home/{net-id}
+mv "${basename}.tar" /staging/groups/zamanian_group/input/
 
 # Optional: move the output into a folder named "sra"
 # mkdir -p sra
