@@ -20,7 +20,7 @@ while read -r acc; do
   # Move resulting FASTQ files to the output directory (one level up)
   mv "${acc}"_*.fastq ../sra_files_output/ 2>/dev/null
 
-done < accession_list.txt
+done < "$(basename "$accession_list")"
 
 # Go back to root
 cd ..
