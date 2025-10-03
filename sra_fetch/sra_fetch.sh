@@ -7,16 +7,28 @@ basename=$(basename "$accession_list" .txt | sed 's/_acc_list$//')
 cp -r "$accession_list" work
 cd work
 
+#while read -r acc; do
+#  acc=$(echo "$acc" | xargs)  # strips leading/trailing whitespace
+#  
+#  prefetch "$acc"    # downloads acc.sra into ./ncbi/public/sra by default
+#  fasterq-dump "$acc" --split-files -O . --temp ./tmp
+#
+#  # remove the .sra file once conversion succeeds
+#  rm -f "${acc}.sra" ./ncbi/public/sra/"${acc}.sra"
+#
+#  # Move resulting FASTQ files to the output directory (one level up)
+#  mv "${acc}"_*.fastq ../sra_files_output/ 2>/dev/null
+#done < "$(basename "$accession_list")"
+
 while read -r acc; do
-  acc=$(echo "$acc" | xargs)  # strips leading/trailing whitespace
+  acc=$(echo "$acc" | xargs)
   
-  prefetch "$acc"    # downloads acc.sra into ./ncbi/public/sra by default
-  fasterq-dump "$acc" --split-files -O . --temp ./tmp
+  fasterq-dump "$acc" \
+    --split-files \
+    -O ./ \
+    --temp ./tmp \
+    --threads 4
 
-  # remove the .sra file once conversion succeeds
-  rm -f "${acc}.sra" ./ncbi/public/sra/"${acc}.sra"
-
-  # Move resulting FASTQ files to the output directory (one level up)
   mv "${acc}"_*.fastq ../sra_files_output/ 2>/dev/null
 done < "$(basename "$accession_list")"
 
