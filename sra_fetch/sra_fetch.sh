@@ -10,16 +10,14 @@ cd work
 while read -r acc; do
   acc=$(echo "$acc" | xargs)  # strips leading/trailing whitespace
   
-  prefetch "$acc"    # no -O
-  fasterq-dump "$acc" --split-files -O .
+  prefetch "$acc"    # downloads acc.sra into ./ncbi/public/sra by default
+  fasterq-dump "$acc" --split-files -O . --temp ./tmp
 
-  # echo "$acc"
-  # prefetch "$acc" -O sra_files
-  # fasterq-dump "sra_files/$acc.sra" -O . --split-files 
+  # remove the .sra file once conversion succeeds
+  rm -f "${acc}.sra" ./ncbi/public/sra/"${acc}.sra"
 
   # Move resulting FASTQ files to the output directory (one level up)
   mv "${acc}"_*.fastq ../sra_files_output/ 2>/dev/null
-
 done < "$(basename "$accession_list")"
 
 # Go back to root
@@ -35,7 +33,7 @@ tar -cvf "${basename}.tar" sra_files_output
 rm -r sra_files_output
 
 # remove staging output tar if there from previous run
-rm -f /staging/groups/zamanian_group/output/"${basename}.tar"
+rm -f /staging/groups/zamanian_group/input/"${basename}.tar"
 
 # mv large output files to staging input folder; avoid their transfer back to /home/{net-id}
 mv "${basename}.tar" /staging/groups/zamanian_group/input/
