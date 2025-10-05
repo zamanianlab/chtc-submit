@@ -1,0 +1,33 @@
+# Submit with:
+# condor_submit sra_fetch.sub sra_list=sra_list.txt
+
+# Long-running jobs (up to 2 weeks)
++LongJob = true
+Accounting_Group = PathobiologicalSciences_Zamanian
+
+# Use Docker environment with sra-tools
+universe = docker
+docker_image = quay.io/biocontainers/sra-tools:3.2.1--h4304569_0
+Requirements = (Target.HasCHTCStaging == true)
+
+# Executable
+executable = sra_fetch.sh
+arguments = $(acc)
+
+# Log files
+log    = logs/$(acc)_$(Cluster)_$(Process).log
+output = logs/$(acc)_$(Cluster)_$(Process).out
+error  = logs/$(acc)_$(Cluster)_$(Process).err
+
+# File transfer settings
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files = sra_fetch.sh
+
+# Resources (tune as needed)
+request_cpus   = 4
+request_memory = 100GB
+request_disk   = 2000GB
+
+# Submit one job per accession
+queue acc from $(sra_list)
