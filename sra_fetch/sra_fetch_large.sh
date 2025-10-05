@@ -1,17 +1,15 @@
 #!/bin/bash
-set -euo pipefail
-
 # Arguments: accession list (optional), single accession (required)
 ACC=$1
 
-echo "=== Starting SRA fetch for accession: ${ACC} ==="
+# echo "=== Starting SRA fetch for accession: ${ACC} ==="
 
 # Make clean directories
 mkdir -p work sra_files_output tmp
 cd work
 
 # Fetch and convert SRA -> FASTQ
-echo "Running fasterq-dump for ${ACC} ..."
+# echo "Running fasterq-dump for ${ACC} ..."
 fasterq-dump "${ACC}" \
   --split-files \
   -O ./ \
