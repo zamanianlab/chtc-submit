@@ -27,7 +27,7 @@ transfer_input_files = sra_fetch.sh
 # Resources (tune as needed)
 request_cpus   = 4
 request_memory = 100GB
-request_disk   = 2000GB
+request_disk   = 1000GB
 
 # Submit one job per accession
 queue acc from $(sra_list)
