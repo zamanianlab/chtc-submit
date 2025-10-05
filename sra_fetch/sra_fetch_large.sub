@@ -22,7 +22,7 @@ error  = logs/$(acc)_$(Cluster)_$(Process).err
 # File transfer settings
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
-transfer_input_files = sra_fetch.sh
+transfer_input_files = sra_fetch_large.sh
 
 # Resources (tune as needed)
 request_cpus   = 4
