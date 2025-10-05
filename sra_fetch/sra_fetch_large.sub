@@ -11,7 +11,7 @@ docker_image = quay.io/biocontainers/sra-tools:3.2.1--h4304569_0
 Requirements = (Target.HasCHTCStaging == true)
 
 # Executable
-executable = chtc-submit/sra_fetch/sra_fetch_large.sh
+executable = /chtc-submit/sra_fetch/sra_fetch_large.sh
 arguments = $(acc)
 
 # Log files
@@ -22,7 +22,7 @@ error  = logs/$(acc)_$(Cluster)_$(Process).err
 # File transfer settings
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
-transfer_input_files = chtc-submit/sra_fetch/sra_fetch_large.sh
+transfer_input_files = /chtc-submit/sra_fetch/sra_fetch_large.sh
 
 # Resources (tune as needed)
 request_cpus   = 4
