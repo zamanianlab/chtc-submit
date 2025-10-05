@@ -11,7 +11,7 @@ docker_image = quay.io/biocontainers/sra-tools:3.2.1--h4304569_0
 Requirements = (Target.HasCHTCStaging == true)
 
 # Executable
-executable = sra_fetch.sh
+executable = sra_fetch_large.sh
 arguments = $(acc)
 
 # Log files
