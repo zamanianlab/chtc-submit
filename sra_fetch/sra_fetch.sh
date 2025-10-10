@@ -1,7 +1,7 @@
 #!/bin/bash
 mkdir input work sra_files_output
 
-accession_list=$(ls /staging/groups/zamanian_group/input/*_1_acc_list.txt)
+accession_list=$(ls /staging/groups/zamanian_group/input/*_2_acc_list.txt)
 basename=$(basename "$accession_list" .txt | sed 's/_acc_list$//')
 
 cp -r "$accession_list" work
