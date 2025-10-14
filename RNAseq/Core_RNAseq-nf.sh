@@ -19,8 +19,8 @@ done
 # cp -r /staging/groups/zamanian_group/input/$1.tar input
 
 # to untar the 1 file:
-#cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
-cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
+# cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
+# cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
 
 # for multiple files:
 cd input || exit
