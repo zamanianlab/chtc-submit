@@ -5,13 +5,13 @@ export HOME=$PWD
 mkdir input work output
 
 # echo core, thread, and memory
-echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
-grep 'cpu cores' /proc/cpuinfo | uniq
-echo $(free -g)
+# echo "CPU threads: $(grep -c processor /proc/cpuinfo)"
+# grep 'cpu cores' /proc/cpuinfo | uniq
+# echo $(free -g)
 
 # transfer and decompress input data from staging ($1 is ${dir} from args)
 # for multiple files with the same naming scheme:
-for file in "${1}"_[0-9]*.tar; do
+for file in /staging/groups/zamanian_group/input/"${1}"_[0-9]*.tar; do
     [ -e "$file" ] || continue
     cp "$file" input/
 done
