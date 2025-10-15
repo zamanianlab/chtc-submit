@@ -10,34 +10,11 @@ mkdir input work output
 # echo $(free -g)
 
 # transfer and decompress input data from staging ($1 is ${dir} from args)
-# for multiple files with the same naming scheme:
-for file in /staging/groups/zamanian_group/input/"${1}"_[0-9]*.tar; do
-    [ -e "$file" ] || continue
-    cp "$file" input/
-done
-# for 1 file:
-# cp -r /staging/groups/zamanian_group/input/$1.tar input
+cp -r /staging/groups/zamanian_group/input/$1.tar input
 
-# to untar the 1 file:
+# to untar the file:
 # cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
-# cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
-
-# for multiple files:
-cd input || exit
-
-for file in "${1}"_[0-9]*.tar; do
-    [ -e "$file" ] || continue
-    echo "Extracting $file..."
-    tar -xvf "$file"
-    rm "$file"
-done
-
-cd ..
-# perform next two lines if you have multiple input folders
-# Make a combined directory
-mkdir -p input/${1}_all
-# Move (or copy) all .fastq files from all mapping folders into it
-find input -type f -name "*.fastq*" -exec mv {} input/${1}_all/ \;
+cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
 
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/Core_RNAseq-nf.git
