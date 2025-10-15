@@ -1,4 +1,4 @@
-#!/bin/bash
+# !/bin/bash
 
 # set home () and mk dirs
 export HOME=$PWD
@@ -28,7 +28,7 @@ export NXF_OPTS='-Xms1g -Xmx8g'
 #if one file
 # nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1\
 # if multiple files
-nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir input/${1}_all
+nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir input \
 #   --star --release "WBPS19" --species "schistosoma_mansoni" --prjn "PRJEA36577" --rlen "50"
 #   --star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJNA723804" --rlen "150"
 #  --star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJEB1797" --rlen "150"
@@ -43,8 +43,10 @@ cd output
 tar -cvf ${output_name}.tar ./*
 cd ..
 
-# mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1.tar /staging/groups/zamanian_group/output/
+# remove any old copy, then move tarball to staging
+STAGING_OUT="/staging/groups/zamanian_group/output"
+rm -f ${STAGING_OUT}/${output_name}.tar
+mv output/${output_name}.tar ${STAGING_OUT}/
 
 # move to staging area
 rm -f /staging/groups/zamanian_group/output/${output_name}.tar
