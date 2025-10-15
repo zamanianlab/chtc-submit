@@ -15,14 +15,18 @@ cp -r /staging/groups/zamanian_group/input/$1_1.tar input
 
 # to untar the 1 file:
 # cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
-cd input && tar -xvf $1_1.tar && rm $1_1.tar && cd .. #for brc transfer no file structure
+cd input && tar -xvf $1_1.tar && rm $1_1.tar  #for brc transfer no file structure
 
 # perform next two lines if you have multiple input folders
 # Make a combined directory
-mkdir -p input/${1}_all
+mkdir ${1}_all
 
 # Move (or copy) all .fastq files from all mapping folders into it
-find input -type f -name "*.fastq*" -exec mv {} input/${1}_all/ \;
+find . -type f -name "*.fastq*" -exec mv {} ${1}_all/ \;
+
+cd .. 
+
+cd work
 
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/Core_RNAseq-nf.git
@@ -47,12 +51,11 @@ nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config \
 #export NXF_OPTS='-Xms1g -Xmx8g'
 #nextflow run Core_RNAseq-nf/Ae-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1 --rlen "150"\
 
-
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
 
 # tar output folder and delete it
-cd output && tar -cvf $1_all.tar $1 && rm -r $1 && cd ..
+cd output && tar -cvf $1_all.tar $1_all && rm -r $1_all && cd ..
 
 # remove staging output tar if there from previous run
 rm -f /staging/groups/zamanian_group/output/$1_all.tar
