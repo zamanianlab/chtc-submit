@@ -1,5 +1,5 @@
 # copy of Core_RNAseq-nf.sh
-#!/bin/bash
+# !/bin/bash
 
 # set home () and mk dirs
 export HOME=$PWD
@@ -44,21 +44,19 @@ nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config \
 #   --star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJNA723804" --rlen "150"
 #  --star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJEB1797" --rlen "150"
 
-
-
-
 # run nextflow (QC, star) for Aedes workflow
 #export NXF_OPTS='-Xms1g -Xmx8g'
 #nextflow run Core_RNAseq-nf/Ae-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1 --rlen "150"\
+cd ..
 
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
 
 # tar output folder and delete it
-cd output && tar -cvf $1_all.tar $1_all && rm -r $1_all && cd ..
+cd output && tar -cvf ${1}_all.tar $1_all && rm -r $1_all && cd ..
 
 # remove staging output tar if there from previous run
-rm -f /staging/groups/zamanian_group/output/$1_all.tar
+rm -f /staging/groups/zamanian_group/output/${1}_all.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1_all.tar /staging/groups/zamanian_group/output/
+mv output/${1}_all.tar /staging/groups/zamanian_group/output/
