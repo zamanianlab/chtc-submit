@@ -7,7 +7,7 @@ basename=$(basename "$accession_list" .txt | sed 's/_acc_list$//')
 cp -r "$accession_list" work
 cd work
 
-#while read -r acc; do
+while read -r acc; do
   acc=$(echo "$acc" | xargs)  # strips leading/trailing whitespace
   
   prefetch "$acc"    # downloads acc.sra into ./ncbi/public/sra by default
