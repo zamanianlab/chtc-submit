@@ -1,0 +1,32 @@
+# Run: 
+
+# request Zamanian Lab server
+Accounting_Group = PathobiologicalSciences_Zamanian
+
+# load docker image
+universe = docker
+docker_image = elenagrehborg/blast_proteomes
+Requirements = (Target.HasCHTCStaging == true)
+
+# executable (/home/egarncarz/) and arguments
+executable = $(script)
+arguments = $(dir)
+
+# log, error, and output files
+log = $(dir)_$(Cluster)_$(Process).log
+error = $(dir)_$(Cluster)_$(Process).err
+output = $(dir)_$(Cluster)_$(Process).out
+
+# transfer files in-out of /home/egarncarz/
+transfer_input_files =
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+# memory, disk and CPU requests
+request_cpus = 40
+request_memory = 100GB
+request_disk = 500GB
+
+# submit 1 job
+queue 1
+### END
