@@ -25,7 +25,7 @@ export NXF_OPTS='-Xms1g -Xmx8g'
 #if one file
 # nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1\
 # if multiple files
-nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir input/${1}
+nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir input/${1} \
    --star --release "WBPS19" --species "caenorhabditis_elegans" --prjn "PRJNA13758" --rlen "150"
 #   --star --release "WBPS19" --species "schistosoma_mansoni" --prjn "PRJEA36577" --rlen "50"
 #   --star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJNA723804" --rlen "150"
