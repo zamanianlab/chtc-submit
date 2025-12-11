@@ -10,13 +10,10 @@ mkdir input work output
 # echo $(free -g)
 
 # transfer and decompress input data from staging ($1 is ${dir} from args)
-mkdir input/$1
-cp /staging/groups/zamanian_group/input/$1.tar input/$1
-cd input/$1 && tar -xvf $1.tar && rm $1.tar && cd ..
-# cp /staging/groups/zamanian_group/input/$1.tar input
+ cp /staging/groups/zamanian_group/input/$1.tar input/
 
 # to untar the file:
-# cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
+ cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
 # cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
 
 # clone nextflow git repo
