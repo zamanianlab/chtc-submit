@@ -10,7 +10,7 @@ mkdir input work output
 # echo $(free -g)
 
 # transfer and decompress input data from staging ($1 is ${dir} from args)
- cp /staging/groups/zamanian_group/input/$1.tar input/
+ cp /staging/groups/zamanian_group/input/$1.tar input
 
 # to untar the file:
  cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
