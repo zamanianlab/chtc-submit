@@ -30,7 +30,7 @@ nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir
 #   --star --release "WBPS19" --species "schistosoma_mansoni" --prjn "PRJEA36577" --rlen "50"
 #   --star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJNA723804" --rlen "150"
 #  --star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJEB1797" --rlen "150"
-  --star --release "WBPS19" --species "brugia_malayi" --prjn "PRJNA10729" --rlen "150"
+--star --release "WBPS19" --species "brugia_malayi" --prjn "PRJNA10729" --rlen "150"
 
 
 
