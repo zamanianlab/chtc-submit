@@ -10,10 +10,13 @@ mkdir input work output
 # echo $(free -g)
 
 # transfer and decompress input data from staging ($1 is ${dir} from args)
- cp /staging/groups/zamanian_group/input/$1.tar input
+# cp /staging/groups/zamanian_group/input/$1.tar input
+# for Elena's bmamapping project
+  cp /staging/groups/zamanian_group/input/EGR_bmamapping_1.tar input
 
 # to untar the file:
- cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
+# cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
+cd input && tar -xvf EGR_bmamapping_1.tar && rm EGR_bmamapping_1.tar && mv */*/* EGR_bmamapping_1 && cd .. #for RD structure
 # cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
 
 # clone nextflow git repo
@@ -26,11 +29,11 @@ export NXF_OPTS='-Xms1g -Xmx8g'
 # nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1\
 # if multiple files
 nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1 \
-   --star --release "WBPS19" --species "caenorhabditis_elegans" --prjn "PRJNA13758" --rlen "150"
+#  --star --release "WBPS19" --species "caenorhabditis_elegans" --prjn "PRJNA13758" --rlen "150"
 #   --star --release "WBPS19" --species "schistosoma_mansoni" --prjn "PRJEA36577" --rlen "50"
 #   --star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJNA723804" --rlen "150"
 #  --star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJEB1797" --rlen "150"
-#  --star --release "WBPS19" --species "brugia_malayi" --prjn "PRJNA10729" --rlen "150"
+  --star --release "WBPS19" --species "brugia_malayi" --prjn "PRJNA10729" --rlen "150"
 
 
 
@@ -43,10 +46,10 @@ nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir
 rm -r work input
 
 # tar output folder and delete it
-cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
+cd output && tar -cvf EGR_bmamapping_1.tar EGR_bmamapping_1 && rm -r EGR_bmamapping_1 && cd ..
 
 # remove staging output tar if there from previous run
-rm -f /staging/groups/zamanian_group/output/$1.tar
+rm -f /staging/groups/zamanian_group/output/EGR_bmamapping_1.tar
 
 # mv large output files to staging output folder; avoid their transfer back to /home/{net-id}
-mv output/$1.tar /staging/groups/zamanian_group/output/
+mv output/EGR_bmamapping_1.tar /staging/groups/zamanian_group/output/
