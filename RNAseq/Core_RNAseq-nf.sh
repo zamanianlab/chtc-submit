@@ -43,9 +43,10 @@ nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir
 # rm files you don't want transferred back to /home/{net-id}
 rm -r work input
 
-# tar output folder and delete it
-cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
-
+# tar output folder and delete it - for when there is no additional directory step between the input files and directory where NF was run
+# cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
+# EGR - when running genome mapping from a denovo assembly, the files and directory published to from nextflow is sra_files_output
+cd output && tar -cvf $1.tar sra_files_output && rm -r sra_files_output && cd ..
 # remove staging output tar if there from previous run
 rm -f /staging/groups/zamanian_group/output/$1.tar
 
