@@ -13,8 +13,8 @@ mkdir input work output
  cp /staging/groups/zamanian_group/input/$1.tar input
 
 # to untar the file:
-# cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
-cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
+ cd input && tar -xvf $1.tar && rm $1.tar && mv */*/* $1 && cd .. #for RD structure
+# cd input && tar -xvf $1.tar && rm $1.tar && cd .. #for brc transfer no file structure
 
 # clone nextflow git repo
 git clone https://github.com/zamanianlab/Core_RNAseq-nf.git
@@ -26,12 +26,12 @@ export NXF_OPTS='-Xms1g -Xmx8g'
 # nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1\
 # if multiple files
 nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1 \
+--star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJEB1797" --rlen "150"
 # nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir sra_files_output \
 # --star --release "WBPS19" --species "brugia_malayi" --prjn "PRJNA10729" --rlen "150"
 #  --star --release "WBPS19" --species "caenorhabditis_elegans" --prjn "PRJNA13758" --rlen "150"
 #   --star --release "WBPS19" --species "schistosoma_mansoni" --prjn "PRJEA36577" --rlen "50"
 #   --star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJNA723804" --rlen "150"
---star --release "WBPS18" --species "dirofilaria_immitis" --prjn "PRJEB1797" --rlen "150"
 
 
 
@@ -50,9 +50,9 @@ rm -r work input
 #cd ..
 
 # tar output folder and delete it - for when there is no additional directory step between the input files and directory where NF was run
-# cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
+ cd output && tar -cvf $1.tar $1 && rm -r $1 && cd ..
 # EGR - when running genome mapping from a denovo assembly, the files and directory published to from nextflow is sra_files_output
-#tar -cvf output/$1.tar sra_files_output && rm -r sra_files_output
+# tar -cvf output/$1.tar sra_files_output && rm -r sra_files_output
 # remove staging output tar if there from previous run
 rm -f /staging/groups/zamanian_group/output/$1.tar
 
