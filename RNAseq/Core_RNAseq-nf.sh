@@ -36,8 +36,8 @@ nextflow run Core_RNAseq-nf/WB-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir
 
 
 # run nextflow (QC, star) for Aedes workflow
-export NXF_OPTS='-Xms1g -Xmx8g'
-nextflow run Core_RNAseq-nf/Ae-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1 --rlen "150"\
+#export NXF_OPTS='-Xms1g -Xmx8g'
+#nextflow run Core_RNAseq-nf/Ae-pe.nf -w work -c Core_RNAseq-nf/chtc.config --dir $1 --rlen "150"\
 
 
 # rm files you don't want transferred back to /home/{net-id}
